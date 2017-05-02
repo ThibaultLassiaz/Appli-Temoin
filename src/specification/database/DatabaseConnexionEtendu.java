@@ -31,10 +31,10 @@ public class DatabaseConnexionEtendu extends DatabaseConnection{
                 String typeUser = rs.getString(4);
                switch (typeUser) {
                     case "Employe" :  
-                        Employe e1 = new Employe(rs.getInt(0), rs.getString(1), rs.getString(2));
+                        Employe e1 = new Employe(rs.getInt(1), rs.getString(2), rs.getString(3));
                         return e1;
                     case "Manager" :
-                        Manager m1 = new Manager(rs.getInt(0), rs.getString(1), rs.getString(2));
+                        Manager m1 = new Manager(rs.getInt(1), rs.getString(2), rs.getString(3));
                         return m1;
                 }
             }
