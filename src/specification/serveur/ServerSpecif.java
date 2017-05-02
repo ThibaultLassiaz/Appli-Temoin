@@ -6,11 +6,19 @@
 package specification.serveur;
 
 import Serveur.ServerImplementation;
+import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 /**
  *
  * @author Lucas
  */
-public class ServerSpecif {
+public class ServerSpecif extends ServerImplementation implements ServerSpecifInterface{
+    
+    public ServerSpecif() throws RemoteException, SQLException, ClassNotFoundException {
+        super();
+    }
+    
+    
     
 }
