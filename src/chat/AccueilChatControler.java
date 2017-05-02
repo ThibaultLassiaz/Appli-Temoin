@@ -27,8 +27,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
-import specification.Amitie;
-import specification.Canal;
+import specification.enties.Amitie;
+import specification.enties.Canal;
 
 /**
  * FXML Controller class
