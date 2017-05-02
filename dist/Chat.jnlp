@@ -8,8 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Chat.jar" size="9401" download="eager" />
-    <jar href="lib\Framework_Java.jar" size="55175" download="eager" />
+    <jar href="Chat.jar" size="11050" download="eager" />
+    <jar href="lib\Framework_Java.jar" size="38728" download="eager" />
     <jar href="lib\ojdbc6.jar" size="1988051" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Chat" >

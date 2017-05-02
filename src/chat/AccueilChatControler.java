@@ -5,8 +5,7 @@
  */
 package chat;
 
-import framework.java.Amitie;
-import framework.java.Canal;
+
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,6 +27,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
+import specification.Amitie;
+import specification.Canal;
 
 /**
  * FXML Controller class
