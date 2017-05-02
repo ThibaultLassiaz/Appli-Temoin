@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -44,12 +45,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="515.0" prefWidth="924.0">
                <children>
-                  <TableView fx:id="tableCanaux" layoutX="77.0" prefHeight="400.0" prefWidth="924.0" AnchorPane.bottomAnchor="-181.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <columns>
-                      <TableColumn fx:id="listCanaux" prefWidth="714.0" text="Canaux disponibles" />
-                      <TableColumn fx:id="btnJoinCanal" minWidth="0.0" prefWidth="209.0" />
-                    </columns>
-                  </TableView>
+                  <ListView fx:id="listCanaux" layoutX="14.0" layoutY="-8.0" prefHeight="515.0" prefWidth="924.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" onMouseClicked="#handleMouseClick"/>
                </children>
             </AnchorPane>
             <AnchorPane maxHeight="-Infinity" prefHeight="178.0" prefWidth="924.0">

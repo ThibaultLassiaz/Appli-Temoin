@@ -20,11 +20,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 /**
@@ -38,15 +40,11 @@ import javafx.util.Callback;
 public class AccueilChatControler implements Initializable {
 
     @FXML
-    private TableView<Canal> tableCanaux;
-    @FXML
     private TableView<?> friendList;
     @FXML
     private Button btnDeco;
     @FXML
-    private TableColumn<Canal, String> listCanaux;
-    @FXML
-    private TableColumn<Button, Boolean> btnJoinCanal;
+    private ListView<Canal> listCanaux;
     @FXML
     private Label labelNom;
     @FXML
@@ -70,27 +68,29 @@ public class AccueilChatControler implements Initializable {
         //Penser a créer un type grade
         // Mettre un case pour instancier ?
     }
+
+    @FXML public void handleMouseClick(MouseEvent arg0) {
+        System.out.println("clicked on " + listCanaux.getSelectionModel().getSelectedItem());
+    }
+    
+    
     
     public void fillCanaux () {
-          
         //ObservableList<Pair<String, Button>> data = FXCollections.observableArrayList();
-        Canal c1 = new Canal(1, "Hello");
         ObservableList<Canal> data = FXCollections.observableArrayList();
-        
+        Canal c1 = new Canal(1, "Hello");
         data.add(c1);
-        
-        dataButtonJoinCanal = FXCollections.observableArrayList();
-        dataButtonJoinCanal.add(new Button("Test"));
         data.add(new Canal(2,"Perso"));
         data.add(new Canal(3,"Amis"));
         data.add(new Canal(4,"Drogue dure"));
         data.add(new Canal(5,"Fun"));
         data.add(new Canal(6,"Partage de fichiers"));
+        listCanaux.setItems(data);
         
-        listCanaux.setCellValueFactory(new PropertyValueFactory<>("NomPlateforme"));
-        btnJoinCanal.setCellValueFactory(new PropertyValueFactory<>("btnPlateforme"));
-        tableCanaux.setItems(null);
-        tableCanaux.setItems(data);
+        
+       // listCanaux.setCellValueFactory(new PropertyValueFactory<>("NomPlateforme"));
+        //tableCanaux.setItems(null);
+        //tableCanaux.setItems(data);  
     }
     
     public void fillAmitie() {
@@ -109,7 +109,6 @@ public class AccueilChatControler implements Initializable {
     @FXML
     private void deconnexion(ActionEvent event) {
     }
-    
 }
 
 
