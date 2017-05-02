@@ -15,4 +15,9 @@ public class Canal extends Plateforme{
     public Canal(int id, String nom) {
         super(id, nom);
     }
+    
+    public String toString() { 
+    return this.getNomPlateforme();
+} 
+    
 }
