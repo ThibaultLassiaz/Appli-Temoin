@@ -24,7 +24,7 @@ public class DatabaseConnexionEtendu extends DatabaseConnection{
     }
     
     
-    private synchronized Utilisateur verifConnexion(String login, String password) throws SQLException {
+    public synchronized Utilisateur verifConnexion(String login, String password) throws SQLException {
         try (Statement stmt = this.getConnection().createStatement()) {
             ResultSet rs = stmt.executeQuery("SELECT idUt, login, motDePasse, typeUtilisateur FROM Utilisateur WHERE login='" + login + "' AND motDePasse='" + password + "'");
             while(rs.next()) {
