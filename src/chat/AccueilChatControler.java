@@ -41,8 +41,6 @@ import specification.enties.Canal;
 public class AccueilChatControler implements Initializable {
 
     @FXML
-    private TableView<?> friendList;
-    @FXML
     private Button btnDeco;
     @FXML
     private ListView<Canal> listCanaux;
@@ -50,25 +48,14 @@ public class AccueilChatControler implements Initializable {
     private Label labelNom;
     @FXML
     private Label labelPrenom;
+    @FXML
+    private ListView<?> listAmis;
 
     
     public ObservableList<Canal> data;
     public ObservableList<Button> dataButtonJoinCanal;
     public ObservableList<Amitie> dataAmitie;
-    
-    
-    public ArrayList getUserFromBD () {
-        ArrayList listParam = new ArrayList();
-        // JDBC getUser
-        return listParam;
-    }
-    
-    public void instanceUser( String typeUser, ArrayList ar) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-        Class<?> classPourInstance = Class.forName(typeUser);
-        Object instance = classPourInstance.newInstance();
-        //Penser a créer un type grade
-        // Mettre un case pour instancier ?
-    }
+
 
     @FXML public void handleMouseClick(MouseEvent arg0) {
         System.out.println("clicked on " + listCanaux.getSelectionModel().getSelectedItem());
@@ -79,6 +66,7 @@ public class AccueilChatControler implements Initializable {
     public void fillCanaux () {
         //ObservableList<Pair<String, Button>> data = FXCollections.observableArrayList();
         ObservableList<Canal> data = FXCollections.observableArrayList();
+        
         Canal c1 = new Canal(1, "Hello");
         data.add(c1);
         data.add(new Canal(2,"Perso"));
