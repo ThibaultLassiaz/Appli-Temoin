@@ -35,6 +35,8 @@ public class LoginScreenControler implements Initializable {
     private TextField inputUser;
     @FXML
     private AnchorPane idAnchor;
+    @FXML
+    private Button btnInscription;
     
     @FXML
     private void btnConnectAction(ActionEvent event) throws IOException {
@@ -50,4 +52,13 @@ public class LoginScreenControler implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }        
+
+    @FXML
+    private void btnInscription(ActionEvent event) throws IOException {
+        Stage s1 = (Stage) idAnchor.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("FicheInscription.fxml"));
+        Scene scene = new Scene(root);
+        s1.setScene(scene);
+        s1.show();
+    }
 }

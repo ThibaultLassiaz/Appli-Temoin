@@ -20,7 +20,6 @@ public class DatabaseConnexionEtendu extends DatabaseConnection{
         super();
     }
     
-    @Override
     public synchronized boolean checkAuthenticity(String login, String password) throws SQLException {
         try (Statement stmt = this.getConnection().createStatement()) {
             ResultSet rs = stmt.executeQuery("SELECT idUt FROM Utilisateur WHERE login='" + login + "' AND motDePasse='" + password + "'");
