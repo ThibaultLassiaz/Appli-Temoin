@@ -6,9 +6,12 @@
 package specification.database;
 
 import Serveur.database.DatabaseConnection;
+import entites.Utilisateur;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import specification.enties.Employe;
+import specification.enties.Manager;
 
 /**
  *
@@ -20,15 +23,26 @@ public class DatabaseConnexionEtendu extends DatabaseConnection{
         super();
     }
     
-    @Override
-    public synchronized boolean checkAuthenticity(String login, String password) throws SQLException {
+    
+    private synchronized Utilisateur verifConnexion(String login, String password) throws SQLException {
         try (Statement stmt = this.getConnection().createStatement()) {
-            ResultSet rs = stmt.executeQuery("SELECT idUt FROM Utilisateur WHERE login='" + login + "' AND motDePasse='" + password + "'");
-            return rs.next();
+            ResultSet rs = stmt.executeQuery("SELECT idUt, login, motDePasse, typeUtilisateur FROM Utilisateur WHERE login='" + login + "' AND motDePasse='" + password + "'");
+            while(rs.next()) {
+                String typeUser = rs.getString(4);
+               switch (typeUser) {
+                    case "Employe" :  
+                        Employe e1 = new Employe(rs.getInt(0), rs.getString(1), rs.getString(2));
+                        return e1;
+                    case "Manager" :
+                        Manager m1 = new Manager(rs.getInt(0), rs.getString(1), rs.getString(2));
+                        return m1;
+                }
+            }
         } catch (SQLException e) {
             System.out.println("Erreur de connexion : " + e.getMessage());
             this.getConnection().rollback();
-            return false;
+            return null;
         }
+        return null;
     }
 }

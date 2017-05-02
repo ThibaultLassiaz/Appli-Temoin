@@ -23,6 +23,11 @@ public class Employe extends Utilisateur {
     private String email;
    // private String motDePasse;
     
+    
+    public Employe(int id, String pseudo, String mdp) {
+        super(id, pseudo, mdp);
+    }
+    
     public Employe(int id, String pseudo, String mdp, String prenom, String nom, Date dateNais, Sexe sexe, String email) {
         super(id, pseudo, mdp);
         this.prenom=prenom;
