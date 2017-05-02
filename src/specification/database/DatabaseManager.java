@@ -9,23 +9,29 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import Serveur.database.DatabaseManager;
+import Serveur.database.DatabaseConnection;
 import java.sql.ResultSet;
 
 /**
  *
  * @author Lucas
  */
-public class DatabaseManagerEtendu extends DatabaseManager{
+public class DatabaseManager extends DatabaseConnection{
+    
+    public DatabaseManager() throws SQLException, ClassNotFoundException {
+        super();
+    }
     
     /**
      * Créer un utilisateur
      *
-     * @param conn Connection
+     * @param login login de l'utilisateur
+     * @param password le mot de passe de l'utilisateur
+     * @param couleur la couleur préféré de l'utilisateur
      * @throws SQLException
      */
-    public static void creationUtilisateur(Connection conn, String login, String password, String couleur) throws SQLException {
-        
+    public synchronized void creationUtilisateur(String login, String password, String couleur) throws SQLException {
+        Connection conn = this.getConnection();
         try (Statement stmt = conn.createStatement()) {
             //Récupère l'identifiant max
             int idMax = 0;
