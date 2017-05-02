@@ -6,9 +6,11 @@
 package specification.serveur;
 
 import Serveur.ServerImplementation;
+import entites.Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import specification.database.DatabaseConnexionEtendu;
 import specification.enties.Canal;
 
 /**
@@ -17,6 +19,7 @@ import specification.enties.Canal;
  */
 public class ServerSpecif extends ServerImplementation implements ServerSpecifInterface{
     
+    private final DatabaseConnexionEtendu dce = new DatabaseConnexionEtendu();
     private final ArrayList<Canal> canaux = new ArrayList<>();
     
     public ServerSpecif() throws RemoteException, SQLException, ClassNotFoundException {
@@ -28,6 +31,11 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
      */
     public ArrayList<Canal> getCanaux() {
         return canaux;
+    }
+
+    @Override
+    public Utilisateur verifConnexion(String log, String mdp) throws SQLException {
+        return dce.verifConnexion(log, mdp);
     }
     
     

@@ -6,10 +6,13 @@
 package specification.serveur;
 
 import Serveur.ServerInterface;
+import entites.Utilisateur;
+import java.sql.SQLException;
 /**
  *
  * @author Lucas
  */
 public interface ServerSpecifInterface extends ServerInterface{
     
+    public Utilisateur verifConnexion(String log, String mdp) throws SQLException;
 }

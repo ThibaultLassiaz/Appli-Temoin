@@ -5,10 +5,14 @@
  */
 package chat;
 
+
 import specification.enties.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,9 +20,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import specification.database.DatabaseManager;
 
 /**
  * FXML Controller class
@@ -28,12 +34,15 @@ import javafx.stage.Stage;
 public class FicheInscriptionController implements Initializable {
     @FXML
     private TextField login;
-    @FXML
-    private TextField mdp;
+    
     @FXML
     private Button inscripiton;
     @FXML
     private GridPane fiche;
+    @FXML
+    private TextField couleur;
+    @FXML
+    private PasswordField mdp;
 
     /**
      * Initializes the controller class.
@@ -44,20 +53,28 @@ public class FicheInscriptionController implements Initializable {
     }    
 
     @FXML
-    private void inscription(ActionEvent event) throws IOException {
+    private void inscription(ActionEvent event) throws IOException, SQLException {
         
         String log =login.getText();
         String motDePasse= mdp.getText();
+        String colour = couleur.getText();
         Stage s1 = (Stage) fiche.getScene().getWindow();
         
-        if(log!=null && motDePasse!=null){
-            
+        if(log!=null && motDePasse!=null && colour!=null){
+            try {
+                DatabaseManager dtb= new DatabaseManager();
+                dtb.getConnection();
+                dtb.creationUtilisateur(log, motDePasse, colour);
+                Parent root = FXMLLoader.load(getClass().getResource("AccueilChat.fxml"));
+                Scene scene = new Scene(root);
+                s1.setScene(scene);
+                s1.show();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(FicheInscriptionController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
-        Parent root = FXMLLoader.load(getClass().getResource("AccueilChat.fxml"));
-        Scene scene = new Scene(root);
-        s1.setScene(scene);
-        s1.show();
+        
         
     }
     
