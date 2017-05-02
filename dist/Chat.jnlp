@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Chat.jnlp">
+  <information>
+    <title>Chat</title>
+    <vendor>Asus G75</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Chat.jar" size="19345" download="eager" />
+    <jar href="lib\Framework_Java.jar" size="38728" download="eager" />
+    <jar href="lib\ojdbc6.jar" size="1988051" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Chat" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="chat.Main"  name="Chat" />
+  <update check="always"/>
+</jnlp>

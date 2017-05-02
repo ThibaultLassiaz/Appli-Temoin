@@ -44,8 +44,14 @@
             <PasswordField fx:id="inputPassword" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <TextField fx:id="inputUser" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button fx:id="btnConnexion" mnemonicParsing="false" onAction="#btnConnectAction" text="Connexion" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+<<<<<<< HEAD
             <Button fx:id="btnInscription" mnemonicParsing="false" onAction="#btnInscription" text="Inscription" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
+=======
+         </children>
+      </GridPane>
+      <Button fx:id="btnInscription" layoutX="514.0" layoutY="2.0" mnemonicParsing="false" onAction="#btnInscription" text="Inscription" />
+>>>>>>> a8b8fd65554fbeddfd7ac13a3c3d26bfd1a93f6f
    </children>
 </AnchorPane>

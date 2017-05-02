@@ -33,14 +33,21 @@
             <Font name="System Italic" size="20.0" />
          </font>
       </Label>
+<<<<<<< HEAD
       <PasswordField fx:id="mdp" onAction="#inscription" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+=======
+>>>>>>> a8b8fd65554fbeddfd7ac13a3c3d26bfd1a93f6f
       <Label text="Couleur" GridPane.rowIndex="3">
          <font>
             <Font name="System Italic" size="20.0" />
          </font>
       </Label>
       <TextField fx:id="login" onAction="#inscription" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+<<<<<<< HEAD
       <TextField fx:id="couleur" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+=======
+      <TextField fx:id="mdp" onAction="#inscription" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+>>>>>>> a8b8fd65554fbeddfd7ac13a3c3d26bfd1a93f6f
       <Button fx:id="inscripiton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#inscription" text="S'inscrire" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <font>
             <Font size="14.0" />
