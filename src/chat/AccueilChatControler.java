@@ -13,7 +13,6 @@ import Client.Client;
 import entites.ListeLien;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -35,8 +34,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import specification.enties.Amitie;
 import specification.enties.Canal;
-import specification.enties.Employe;
-import static specification.enties.Employe.Sexe.homme;
 
 /**
  * FXML Controller class

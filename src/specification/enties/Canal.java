@@ -38,4 +38,7 @@ public class Canal extends Plateforme implements Serializable{
         fichiersAssocies = fichiers;
     }
     
+    public List<String> getFichiers() {
+        return this.fichiersAssocies;
+    }
 }
