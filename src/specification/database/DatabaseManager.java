@@ -13,13 +13,10 @@ import Serveur.database.DatabaseConnection;
 import entites.Utilisateur;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import specification.enties.Amitie;
-
-=======
 import specification.enties.Canal;
 import specification.enties.Message;
->>>>>>> 4a8ee75222c285ef58767d21d2b45e597e3fd369
+
 
 /**
  *
@@ -60,6 +57,7 @@ public class DatabaseManager extends DatabaseConnection{
         }
 
     }
+
     
     public synchronized ArrayList<Canal> recuperationCanaux() throws SQLException {
         Connection conn = this.getConnection();
@@ -131,7 +129,7 @@ public class DatabaseManager extends DatabaseConnection{
 
     /**
      * Récupère la liste d'ami d'un utilisateur
-     * @param idUt
+     * @param idUt id de l'utilisateur courant dont on veut récupérer la liste d'amis
      * @throws SQLException 
      */
     public synchronized ArrayList<String> getAmis(int idUt) throws SQLException{
@@ -175,5 +173,51 @@ public class DatabaseManager extends DatabaseConnection{
         }
         return alm;
     }
+ 
+    /**
+     * Suppression d'un fichier 
+     * 
+     * @param nomF
+     * @throws SQLException 
+     */
+    public synchronized void supprimerFichier(String nomF) throws SQLException{
+        Connection conn = this.getConnection();
+        try (Statement stmt=conn.createStatement()){
+            ResultSet rs= stmt.executeQuery("delete idF,idUt , idC ,nom ,chemin,dateCreation,dateDerniereModif,taille ,type from Fichier where nom = "+ nomF  );
+            conn.commit();
+            System.out.println("Fichié supprimé");
+        }catch (SQLException e) {
+            conn.rollback();
+            System.out.println("Erreur de suppression de fichier : " + e.getMessage());
+            
+        }
+    }
     
+    /**
+     * Création d'un fichier
+     * 
+     * @param nomF nom du fichier à créer 
+     * @param idUt id de l'utilisateur qui crée le fichier
+     * @param idC  id de la conversation à laquelle sera affecté le fichier
+     * @throws SQLException 
+     */
+    public synchronized void créationFichier(String nomF, int idUt, int idC, String Path, String type, int taille) throws SQLException{
+        Connection conn = this.getConnection();
+        try (Statement stmt=conn.createStatement()){
+            //Récupère l'identifiant max
+            int idMax = 0;
+            ResultSet rset = stmt.executeQuery("SELECT max(idF) from Fichier");
+            while (rset.next()) {
+                idMax = rset.getInt("max(idF)") + 1;
+            }
+            ResultSet rs= stmt.executeQuery("insert into Fichier (idF, idUt, idC, nom , chemin, dateCreation, dateDerniereModif, taille, type) values ( "
+                    + idMax +  "," + idUt + "," + idC + ",'" +nomF + "','" + Path +  "',SYSDATE, null,"  + taille+ "," + type + ")");
+            conn.commit();
+            System.out.println("Fichié crée");
+        }catch (SQLException e) {
+            conn.rollback();
+            System.out.println("Erreur de crétion de fichier : " + e.getMessage());
+            
+        }
+    }
 }
