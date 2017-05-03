@@ -44,7 +44,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="88.0" prefWidth="171.0">
                <children>
-                  <Button fx:id="btnUploadFichier" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="113.0" text="Ajouter un fichier" />
+                  <Button fx:id="btnUploadFichier" alignment="CENTER" onAction="#btnUploadFichier" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="113.0" text="Ajouter un fichier" />
                </children>
             </VBox>
          </children>
@@ -53,7 +53,7 @@
          <children>
             <AnchorPane prefHeight="665.0" prefWidth="200.0">
                <children>
-                  <ListView fx:id="listFichiers" layoutY="69.0" prefHeight="624.0" prefWidth="200.0" />
+                  <ListView fx:id="listFichiers" layoutY="69.0" onMouseClicked="#handleMouseClick" prefHeight="624.0" prefWidth="200.0" />
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" prefHeight="69.0" prefWidth="200.0" text="Fichiers disponibles">
                      <font>
                         <Font name="Microsoft New Tai Lue Bold" size="16.0" />

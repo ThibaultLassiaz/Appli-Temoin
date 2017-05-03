@@ -3,33 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Lucas/Documents/Scolarité/L3%20MIAGE/Framework/Appli-Temoin/src/specification/enties/Canal.java</file>
-            <file>file:/C:/Users/Lucas/Documents/Scolarité/L3%20MIAGE/Framework/Appli-Temoin/src/specification/enties/Employe.java</file>
-            <file>file:/C:/Users/Lucas/Documents/Scolarité/L3%20MIAGE/Framework/Appli-Temoin/src/specification/enties/Manager.java</file>
-            <file>file:/C:/Users/Lucas/Documents/Scolarité/L3%20MIAGE/Framework/Appli-Temoin/src/specification/serveur/ServerSpecif.java</file>
-            <file>file:/C:/Users/Lucas/Documents/Scolarité/L3%20MIAGE/Framework/Appli-Temoin/src/specification/enties/Famille.java</file>
-            <file>file:/C:/Users/Lucas/Documents/Scolarité/L3%20MIAGE/Framework/Appli-Temoin/src/specification/database/DatabaseConnexionEtendu.java</file>
-            <file>file:/C:/Users/Lucas/Documents/Scolarité/L3%20MIAGE/Framework/Appli-Temoin/src/test/testLucasF.java</file>
-=======
-<<<<<<< HEAD
-            <file>file:/C:/Users/hanene/Documents/NetBeansProjects/Chat/Appli-Temoin/src/chat/LoginScreenControler.java</file>
-            <file>file:/C:/Users/hanene/Documents/NetBeansProjects/Chat/Appli-Temoin/src/Client/Client.java</file>
-            <file>file:/C:/Users/hanene/Documents/NetBeansProjects/Chat/Appli-Temoin/src/specification/serveur/ServerSpecif.java</file>
-            <file>file:/C:/Users/hanene/Documents/NetBeansProjects/Chat/Appli-Temoin/src/chat/FicheInscription.fxml</file>
-            <file>file:/C:/Users/hanene/Documents/NetBeansProjects/Chat/Appli-Temoin/src/chat/FicheInscriptionController.java</file>
-            <file>file:/C:/Users/hanene/Documents/NetBeansProjects/Chat/Appli-Temoin/src/chat/AccueilChatControler.java</file>
-=======
-            <file>file:/D:/RMI/Appli-Temoin/src/chat/Main.java</file>
-            <file>file:/D:/RMI/Appli-Temoin/src/chat/LoginScreen.fxml</file>
-            <file>file:/D:/RMI/Appli-Temoin/src/specification/database/DatabaseConnexionEtendu.java</file>
             <file>file:/D:/RMI/Appli-Temoin/src/specification/serveur/ServerSpecifInterface.java</file>
-            <file>file:/D:/RMI/Appli-Temoin/src/chat/LoginScreenControler.java</file>
-            <file>file:/D:/RMI/Appli-Temoin/src/Client/Client.java</file>
-            <file>file:/D:/RMI/Appli-Temoin/src/chat/FicheInscriptionController.java</file>
             <file>file:/D:/RMI/Appli-Temoin/src/specification/serveur/ServerSpecif.java</file>
->>>>>>> 58942aad3e9c0a02b8128b6037b4f17016708bb7
->>>>>>> b6dab3f4329bb166362f784941650b0274a559d8
+            <file>file:/D:/RMI/Appli-Temoin/src/chat/FenetreChat.fxml</file>
+            <file>file:/D:/RMI/Appli-Temoin/src/chat/FenetreChatController.java</file>
         </group>
     </open-files>
 </project-private>

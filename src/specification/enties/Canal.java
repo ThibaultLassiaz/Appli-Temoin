@@ -8,6 +8,8 @@ package specification.enties;
 import entites.Plateforme;
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -16,8 +18,11 @@ import java.util.logging.Logger;
  */
 public class Canal extends Plateforme implements Serializable{
     
+    private List<String> fichiersAssocies;
+    
     public Canal(int id, String nom) throws RemoteException {
         super(id, nom);
+        this.fichiersAssocies = new ArrayList<>();
     }
     
     public String toString() { 
@@ -27,6 +32,13 @@ public class Canal extends Plateforme implements Serializable{
             Logger.getLogger(Canal.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-    } 
+    }
     
+    public void initFichiers(List<String> fichiers) {
+        fichiersAssocies = fichiers;
+    }
+    
+    public List<String> getFichiers() {
+        return this.fichiersAssocies;
+    }
 }
