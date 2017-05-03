@@ -55,7 +55,6 @@ public class DatabaseManager extends DatabaseConnection{
 
     }
     
-<<<<<<< HEAD
     public synchronized ArrayList<Canal> recuperationCanaux() throws SQLException {
         Connection conn = this.getConnection();
         ArrayList<Canal> canaux = new ArrayList<>();
@@ -77,7 +76,7 @@ public class DatabaseManager extends DatabaseConnection{
         return canaux;
 
     }
-=======
+    
     /** 
      * Créer un lien d'amitié entre deux utilisateurs
      * @param idUt id de l'utilisateur courant
@@ -126,7 +125,4 @@ public class DatabaseManager extends DatabaseConnection{
         }
     }
         
-    
-    
->>>>>>> b6dab3f4329bb166362f784941650b0274a559d8
 }

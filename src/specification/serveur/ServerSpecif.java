@@ -94,8 +94,6 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
             }
         }
     }
-<<<<<<< HEAD
-
     /**
      * Creer les canaux et ce qu'ils contiennent à partir des données en base en appelant la fonction recuperationCanaux de DatabaseManager.
      * @throws SQLException 
@@ -112,12 +110,4 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
         }        
     }
 
-    @Override
-    public DatabaseConnexionEtendu getDCE() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-=======
-    
->>>>>>> b6dab3f4329bb166362f784941650b0274a559d8
 }
