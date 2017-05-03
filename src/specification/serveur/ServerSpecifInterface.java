@@ -30,4 +30,5 @@ public interface ServerSpecifInterface extends ServerInterface{
     public void uploadFichier(FileExtended fe, _Utilisateur client) throws RemoteException;
     
     public void downloadFichier(String fileName) throws RemoteException;
+    
 }
