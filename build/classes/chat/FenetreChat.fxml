@@ -12,11 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<<<<<<< HEAD
 <AnchorPane id="AnchorPane" fx:id="idAnchor" prefHeight="750.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.102" fx:controller="chat.FenetreChatController">
-=======
-<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.102" fx:controller="chat.FenetreChatController">
->>>>>>> a6d049fe9e6fabb6d08358de324fc44766a0a89f
    <children>
       <SplitPane prefHeight="751.0" prefWidth="820.0">
          <items>

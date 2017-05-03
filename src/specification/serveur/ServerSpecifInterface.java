@@ -6,6 +6,7 @@
 package specification.serveur;
 
 import Serveur.ServerInterface;
+import entites.Utilisateur;
 import entites.interfaces._Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ import specification.enties.Canal;
  */
 public interface ServerSpecifInterface extends ServerInterface{
     
-    public boolean verifConnexion(_Utilisateur utilisateur, String log, String mdp) throws SQLException, RemoteException;
+    public Utilisateur verifConnexion(String log, String mdp) throws SQLException, RemoteException;
     
     public DatabaseConnexionEtendu getDCE() throws RemoteException;
     
