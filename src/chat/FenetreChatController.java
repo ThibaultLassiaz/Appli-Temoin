@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import Client.Client;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -53,12 +54,12 @@ public class FenetreChatController implements Initializable {
         if(file!=null) {
             uploadFile(file);
         }
-        
     }
     
 
     private void uploadFile(File file) throws IOException {
         FileExtended fileExtended = new FileExtended(file);
+        Client.serveur.uploadFichier(fileExtended, Client.client);
     }
     
     public void fillFichier () {

@@ -6,8 +6,11 @@
 package specification.serveur;
 
 import Serveur.ServerImplementation;
+import entites.FileExtended;
 import entites.ListeLien;
 import entites.Utilisateur;
+import entites.interfaces._Utilisateur;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -47,13 +50,8 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
     public Utilisateur verifConnexion(String log, String mdp) throws SQLException, RemoteException {
         return dce.verifConnexion(log, mdp);
     }
-    
-    @Override
-    public DatabaseConnexionEtendu getDCE() throws RemoteException{
-        return this.dce;
-    }
 
-        /**
+    /**
      * 
      * @param idUt l'identifiant d'un utilisateur de canal
      * @return une arrayList de canal où l'utilisateur d'identifiant idUt est présent
@@ -121,6 +119,17 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ServerSpecif.class.getName()).log(Level.SEVERE, null, ex);
         }        
+    }
+
+    @Override
+    public void uploadFichier(FileExtended fe, _Utilisateur client) throws RemoteException {
+        try {
+            String path = this.dbm.creationFichier(fe, client);
+            if(path!=null)
+                this.uploadFichier(fe, path);
+        } catch (SQLException | IOException ex) {
+            Logger.getLogger(ServerSpecif.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

@@ -6,6 +6,7 @@
 package specification.serveur;
 
 import Serveur.ServerInterface;
+import entites.FileExtended;
 import entites.ListeLien;
 import entites.Utilisateur;
 import entites.interfaces._Utilisateur;
@@ -23,9 +24,9 @@ public interface ServerSpecifInterface extends ServerInterface{
     
     public Utilisateur verifConnexion(String log, String mdp) throws SQLException, RemoteException;
     
-    public DatabaseConnexionEtendu getDCE() throws RemoteException;
-    
     public ArrayList<Canal> getCanaux(int idUt) throws RemoteException;
     
-     public ListeLien<Amitie> getAmitie(Utilisateur u1) throws RemoteException, SQLException;
+    public ListeLien<Amitie> getAmitie(Utilisateur u1) throws RemoteException, SQLException;
+    
+    public void uploadFichier(FileExtended fe, _Utilisateur client) throws RemoteException;
 }

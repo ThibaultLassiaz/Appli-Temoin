@@ -10,8 +10,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import Serveur.database.DatabaseConnection;
+import entites.FileExtended;
 import entites.ListeLien;
 import entites.Utilisateur;
+import entites.interfaces._Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -270,12 +272,13 @@ public class DatabaseManager extends DatabaseConnection{
     /**
      * Création d'un fichier
      * 
-     * @param nomF nom du fichier à créer 
-     * @param idUt id de l'utilisateur qui crée le fichier
-     * @param idC  id de la conversation à laquelle sera affecté le fichier
+     * @param fe
+     * @param client
+     * @return 
      * @throws SQLException 
+     * @throws java.rmi.RemoteException 
      */
-    public synchronized void creationFichier(String nomF, int idUt, int idC, String Path, String type, int taille) throws SQLException{
+    public synchronized String creationFichier(FileExtended fe, _Utilisateur client) throws SQLException, RemoteException{
         Connection conn = this.getConnection();
         try (Statement stmt=conn.createStatement()){
             //Récupère l'identifiant max
@@ -284,15 +287,21 @@ public class DatabaseManager extends DatabaseConnection{
             while (rset.next()) {
                 idMax = rset.getInt("max(idF)") + 1;
             }
-            ResultSet rs= stmt.executeQuery("insert into Fichier (idF, idUt, idC, nom , chemin, dateCreation, dateDerniereModif, taille, type) values ( "
-                    + idMax +  "," + idUt + "," + idC + ",'" +nomF + "','" + Path +  "',SYSDATE, null,"  + taille+ "," + type + ")");
+            String path = System.getProperty("user.home") + "\\" + idMax + "-" + fe.getName();
+            String sql = "insert into Fichier (idF, idUt, idC, nom , chemin, dateCreation, dateDerniereModif, taille, type) values ( "
+                    + idMax +  "," + client.getId() + "," + client.getCurrentPlateforme().getIdPlateforme() + ",'" + fe.getName() + "','" + path 
+                    +  "',SYSDATE," + null + ","  + fe.getSize()+ ",'" + fe.getType().toString() + "')";
+            System.out.println(sql);
+            ResultSet rs= stmt.executeQuery(sql);
             conn.commit();
             System.out.println("Fichié crée");
+            return path;
         }catch (SQLException e) {
             conn.rollback();
             System.out.println("Erreur de crétion de fichier : " + e.getMessage());
             
         }
+        return null;
     }
 
      /* Créer un message à partir des informations données en paramètre
