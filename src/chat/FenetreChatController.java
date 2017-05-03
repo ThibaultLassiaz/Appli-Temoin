@@ -5,9 +5,20 @@
  */
 package chat;
 
+import Client.Client;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +32,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import specification.enties.Canal;
+import specification.enties.Message;
 
 /**
  * FXML Controller class
@@ -34,7 +47,7 @@ public class FenetreChatController implements Initializable {
     @FXML
     private Label labelListUser;
     @FXML
-    private ListView<?> listMessages;
+    private ListView<Message> listMessages;
     @FXML
     private Button btnUploadFichier;
     @FXML
@@ -59,8 +72,13 @@ public class FenetreChatController implements Initializable {
         
     }
     
-    public void fillChat() {
-        
+    public void fillChat() throws SQLException, ClassNotFoundException, RemoteException, NotBoundException, MalformedURLException {
+        ArrayList<Message> messages = Client.serveur.getConversation(Client.canalId);
+        ObservableList<Message> messagesObservable = FXCollections.observableArrayList();
+        messages.forEach((m) -> {
+            messagesObservable.add(m);
+        });
+        listMessages.setItems(messagesObservable);
     }
     
     /**
@@ -69,7 +87,11 @@ public class FenetreChatController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         fillFichier();
-        fillChat();
+        try {
+            fillChat();
+        } catch (SQLException | ClassNotFoundException | RemoteException | NotBoundException | MalformedURLException ex) {
+            Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
     
 }

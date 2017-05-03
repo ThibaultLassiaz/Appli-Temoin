@@ -12,9 +12,11 @@ import entites.interfaces._Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import specification.database.DatabaseConnexionEtendu;
 import specification.enties.Amitie;
 import specification.enties.Canal;
+import specification.enties.Message;
 /**
  *
  * @author Lucas
@@ -27,5 +29,7 @@ public interface ServerSpecifInterface extends ServerInterface{
     
     public ArrayList<Canal> getCanaux(int idUt) throws RemoteException;
     
-     public ListeLien<Amitie> getAmitie(Utilisateur u1) throws RemoteException, SQLException;
+    public ListeLien<Amitie> getAmitie(Utilisateur u1) throws RemoteException, SQLException;
+
+    public ArrayList<Message> getConversation(int idCanal) throws RemoteException, SQLException;
 }

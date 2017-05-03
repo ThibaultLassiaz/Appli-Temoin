@@ -5,21 +5,34 @@
  */
 package specification.enties;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Lucas
  */
-public class Message {
+public class Message implements Serializable{
     private int idMessage;
     private int idC;
     private int idUt;
     private String message;
+    private String loginUt;
+    private String couleur;
 
     public Message(int idMessage, int idC, int idUt, String message){
         this.idMessage = idMessage;
         this.idC = idC;
         this.idUt = idUt;
         this.message = message;
+    }
+    
+    public Message(int idMessage, int idC, int idUt, String message, String loginUt, String couleur){
+        this.idMessage = idMessage;
+        this.idC = idC;
+        this.idUt = idUt;
+        this.message = message;
+        this.loginUt = loginUt;
+        this.couleur = couleur;
     }
     
     /**
@@ -71,6 +84,37 @@ public class Message {
         this.message = message;
     }
     
-    
+    @Override
+    public String toString(){
+        return this.loginUt + " : " + this.getMessage();
+    }
+
+    /**
+     * @return the loginUt
+     */
+    public String getLoginUt() {
+        return loginUt;
+    }
+
+    /**
+     * @param loginUt the loginUt to set
+     */
+    public void setLoginUt(String loginUt) {
+        this.loginUt = loginUt;
+    }
+
+    /**
+     * @return the couleur
+     */
+    public String getCouleur() {
+        return couleur;
+    }
+
+    /**
+     * @param couleur the couleur to set
+     */
+    public void setCouleur(String couleur) {
+        this.couleur = couleur;
+    }
             
 }

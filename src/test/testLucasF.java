@@ -20,13 +20,10 @@ import specification.serveur.ServerSpecif;
  */
 public class testLucasF {
     public static void main(String[] args) throws RemoteException, SQLException, ClassNotFoundException{
-        System.out.println("Test Lucas     ...");
-        ServerSpecif ss = new ServerSpecif();
+        System.out.println("Test Lucas     .....");
         DatabaseManager dbm = new DatabaseManager();
-        dbm.creationConversation("Guez a til reussis?");
-        dbm.creationMessage(3, 2, "PLS le projet!");
-        dbm.creationMessage(3, 4, "Tractopelle.exe");
         dbm.creationMessage(3, 5, "Drogue dure!");
+        System.out.println("!!!!!!!!!!!!!!!!!!!" + dbm.getMessageFromConversation(3).size());
         dbm.suppressionMessage(4);
         dbm.suppressionConversation(4);
         /*System.out.println("Test des messages:");
@@ -61,7 +58,7 @@ public class testLucasF {
         c4.addUser(u5);
         c4.addUser(u6);
         
-        ss.ajoutCanal(c1);
+        /*ss.ajoutCanal(c1);
         ss.ajoutCanal(c2);
         ss.ajoutCanal(c3);
         ss.ajoutCanal(c4);
@@ -70,7 +67,7 @@ public class testLucasF {
         for (Canal arc1 : arc) {
             System.out.println("Passe la");
         }
-        System.out.println("Alors?");
+        */System.out.println("Alors?");
 
         
         /*System.out.println("Nombre de canaux : " + ss.getCanaux().size());

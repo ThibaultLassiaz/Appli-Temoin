@@ -237,9 +237,9 @@ public class DatabaseManager extends DatabaseConnection{
         ArrayList<Message> alm = new ArrayList<>();
         Connection conn = this.getConnection();
         try (Statement stmt = conn.createStatement()){
-            ResultSet rs = stmt.executeQuery("SELECT idM, idC, idUt, message FROM Message WHERE idC="+idC);
+            ResultSet rs = stmt.executeQuery("SELECT idM, idC, idUt, message, login, couleur FROM Message join utilisateur using(idUt) WHERE idC="+idC);
             while(rs.next()){
-                alm.add(new Message(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4)));
+                alm.add(new Message(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6)));
             }
         }catch (SQLException e) {
             conn.rollback();

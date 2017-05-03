@@ -17,6 +17,7 @@ import specification.database.DatabaseConnexionEtendu;
 import specification.database.DatabaseManager;
 import specification.enties.Amitie;
 import specification.enties.Canal;
+import specification.enties.Message;
 
 /**
  *
@@ -43,6 +44,11 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
         return this.getCanauxFromIdUtilisateur(idUt);
     }
 
+    @Override
+    public ArrayList<Message> getConversation(int idCanal) throws SQLException, RemoteException {
+        return dbm.getMessageFromConversation(idCanal);
+    }
+    
     @Override
     public Utilisateur verifConnexion(String log, String mdp) throws SQLException, RemoteException {
         return dce.verifConnexion(log, mdp);

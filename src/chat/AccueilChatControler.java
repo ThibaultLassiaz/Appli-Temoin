@@ -63,6 +63,7 @@ public class AccueilChatControler implements Initializable {
 
 
     @FXML public void handleMouseClick(MouseEvent arg0) throws IOException, RemoteException {
+        Client.canalId = listCanaux.getSelectionModel().getSelectedItem().getIdPlateforme();
         System.out.println("clicked on " + listCanaux.getSelectionModel().getSelectedItem().getIdPlateforme());
         Stage s1 = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("FenetreChat.fxml"));
