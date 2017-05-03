@@ -12,21 +12,29 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import Client.Client;
+import java.rmi.RemoteException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+
 import javafx.stage.Stage;
 import Client.Client;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import specification.enties.Canal;
 
 /**
  * FXML Controller class
@@ -44,11 +52,16 @@ public class FenetreChatController implements Initializable {
     @FXML
     private Button btnUploadFichier;
     @FXML
-    private ListView<?> listFichiers;
+    private ListView<String> listFichiers;
     @FXML
     private Label labelDiscussWith;
     @FXML
     private AnchorPane idAnchor;
+    
+    @FXML public void handleMouseClick(MouseEvent arg0) throws RemoteException {
+        String nomFichier = listFichiers.getSelectionModel().getSelectedItem();
+        downloadFile(nomFichier);
+    }
     
     @FXML
     public void btnUploadFichier(ActionEvent event) throws IOException {
@@ -57,20 +70,33 @@ public class FenetreChatController implements Initializable {
         if(file!=null) {
             uploadFile(file);
         }
-        
     }
     
+
     public void InitConvName () throws RemoteException {
         labelDiscussWith.setText(Client.client.getCurrentPlateforme().getNomPlateforme());
     }
     
 
+    private void downloadFile(String nomF) throws RemoteException {
+        Client.serveur.downloadFichier(nomF);
+    }
+
+
     private void uploadFile(File file) throws IOException {
         FileExtended fileExtended = new FileExtended(file);
+        Client.serveur.uploadFichier(fileExtended, Client.client);
     }
     
-    public void fillFichier () {
+    public void fillFichier () throws RemoteException {
+        Canal c = (Canal) Client.client.getCurrentPlateforme();
+        List<String> fichiers = c.getFichiers();
+        ObservableList<String> fichiersObservable = FXCollections.observableArrayList();
         
+        fichiers.forEach((f) -> {
+            fichiersObservable.add(f);
+        });
+        listFichiers.setItems(fichiersObservable);
     }
     
     public void fillChat() {
@@ -82,7 +108,11 @@ public class FenetreChatController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        fillFichier();
+        try {
+            fillFichier();
+        } catch (RemoteException ex) {
+            Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         fillChat();
         try {
             InitConvName();
