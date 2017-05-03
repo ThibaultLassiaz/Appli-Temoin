@@ -7,6 +7,7 @@ package chat;
 
 
 import entites.Utilisateur;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.util.ArrayList;
@@ -18,7 +19,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -28,6 +32,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import specification.enties.Amitie;
 import specification.enties.Canal;
@@ -59,14 +66,28 @@ public class AccueilChatControler implements Initializable {
     public ObservableList<Canal> data;
     public ObservableList<Button> dataButtonJoinCanal;
     public ObservableList<Utilisateur> dataAmitie;
+    @FXML
+    private AnchorPane idAnchor;
 
 
-    @FXML public void handleMouseClick(MouseEvent arg0) {
+    @FXML public void handleMouseClick(MouseEvent arg0) throws IOException {
         System.out.println("clicked on " + listCanaux.getSelectionModel().getSelectedItem().getIdPlateforme());
+        Stage s1 = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("FenetreChat.fxml"));
+        Scene scene = new Scene(root);
+        s1.initModality(Modality.APPLICATION_MODAL);
+        s1.setScene(scene);
+        s1.show();
     }
     
-    @FXML public void handleMouseClickAmis(MouseEvent arg0) {
+    @FXML public void handleMouseClickAmis(MouseEvent arg0) throws IOException {
         System.out.println("clicked on " + listAmis.getSelectionModel().getSelectedItem().getId());
+        Stage s1 = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("FenetreChat.fxml"));
+        Scene scene = new Scene(root);
+        s1.initModality(Modality.APPLICATION_MODAL);
+        s1.setScene(scene);
+        s1.show();
     }
     
     public void fillCanaux () {
