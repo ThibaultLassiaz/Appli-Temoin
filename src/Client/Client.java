@@ -6,6 +6,7 @@
 package Client;
 
 import entites.Utilisateur;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 import specification.serveur.ServerSpecifInterface;
 
@@ -19,7 +20,7 @@ public class Client{
     private final String pseudo;
     boolean connecte = false;
     
-    public Client(ServerSpecifInterface serveur, String log, String mdp) throws SQLException {
+    public Client(ServerSpecifInterface serveur, String log, String mdp) throws SQLException, RemoteException {
         this.serveur = serveur;
         this.client = this.serveur.verifConnexion(log, mdp);
         if(client!=null) {
