@@ -14,6 +14,7 @@ import entites.Utilisateur;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import specification.enties.Canal;
+import specification.enties.Message;
 
 /**
  *
@@ -124,5 +125,26 @@ public class DatabaseManager extends DatabaseConnection{
             System.out.println("Erreur de création de l'amitié : " + e.getMessage());
         }
     }
-        
+    
+    /**
+     * Récuperation des messages
+     * @param idC id de la conversation dont on cherche les messages
+     * @return une liste de Message provenant de la BD dans la conversation d'identifiant idC
+     * @throws SQLException
+     */
+    public synchronized ArrayList<Message> getMessageFromConversation(int idC) throws SQLException{
+        ArrayList<Message> alm = new ArrayList<>();
+        Connection conn = this.getConnection();
+        try (Statement stmt = conn.createStatement()){
+            ResultSet rs = stmt.executeQuery("SELECT idM, idC, idUt, message FROM Message WHERE idC="+idC);
+            while(rs.next()){
+                alm.add(new Message(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4)));
+            }
+        }catch (SQLException e) {
+            conn.rollback();
+            System.out.println("Erreur de chargement des messages : " + e.getMessage());
+        }
+        return alm;
+    }
+    
 }
