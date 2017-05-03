@@ -5,11 +5,14 @@
  */
 package test;
 
+import entites.Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import specification.database.DatabaseManager;
+import specification.enties.Canal;
 import specification.enties.Message;
+import specification.serveur.ServerSpecif;
 
 /**
  *
@@ -18,7 +21,7 @@ import specification.enties.Message;
 public class testLucasF {
     public static void main(String[] args) throws RemoteException, SQLException, ClassNotFoundException{
         System.out.println("Test Lucas     ...");
-        //ServerSpecif ss = new ServerSpecif();
+        ServerSpecif ss = new ServerSpecif();
         DatabaseManager dbm = new DatabaseManager();
         dbm.creationConversation("Guez a til reussis?");
         dbm.creationMessage(3, 2, "PLS le projet!");
@@ -30,7 +33,7 @@ public class testLucasF {
         ArrayList<Message> alm = dbm.getMessageFromConversation(1);
         for (Message alm1 : alm) {
             System.out.println(alm1.getMessage());
-        }
+        }*/
         Canal c1 = new Canal(1, "canal1");
         Canal c2 = new Canal(2, "canal2");
         Canal c3 = new Canal(3, "canal3");
@@ -57,18 +60,18 @@ public class testLucasF {
         c4.addUser(u4);
         c4.addUser(u5);
         c4.addUser(u6);
+        
         ss.ajoutCanal(c1);
         ss.ajoutCanal(c2);
         ss.ajoutCanal(c3);
         ss.ajoutCanal(c4);
-        /*
+        
         ArrayList<Canal> arc = ss.getCanauxFromIdUtilisateur(5);
         for (Canal arc1 : arc) {
-        System.out.println("A");
+            System.out.println("Passe la");
         }
         System.out.println("Alors?");
-<<<<<<< HEAD
-        */
+
         
         /*System.out.println("Nombre de canaux : " + ss.getCanaux().size());
         System.out.println("Canal 2 : " + ss.getCanaux().get(2).getListeUtilisateurs().get(1).getPseudo());*/

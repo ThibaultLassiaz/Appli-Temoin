@@ -283,4 +283,36 @@ public class DatabaseManager extends DatabaseConnection{
         }
     }
     
+    /**
+     * Ajout d'un utilisateur à une conversation
+     * @param idUt l'identifiant de l'utilisateur
+     * @param idC l'identifiant d'une conversation
+     * @throws SQLException 
+     */
+    public synchronized void ajoutUtilisateurConversation(int idUt, int idC) throws SQLException{
+        Connection conn = this.getConnection();
+        try(Statement stmt = conn.createStatement()){
+            stmt.executeQuery("INSERT INTO Conversation_Utilisateur(idC, idUt) values (" + idC + ", " + idUt + ")");
+            conn.commit();
+            System.out.println("Utilisateur rajouté à la conversation.");
+        } catch(SQLException e){
+            conn.rollback();
+            System.out.println("Erreur insertion d'un utilisateur à la conversation : " + e.getMessage());            
+        }
+    }
+    
+    
+    public synchronized void suppressionUtilisateurConversion(int idC, int idUt) throws SQLException{
+        Connection conn = this.getConnection();
+        try(Statement stmt = conn.createStatement()){
+            stmt.executeQuery("DELETE FROM Conversation_Utilisateur WHERE idUt=" + idUt + " and idC=" + idC);
+            conn.commit();
+            System.out.println("Utilisateur supprimé de la conversation.");
+        } catch(SQLException e){
+            conn.rollback();
+            System.out.println("Erreur lors de la suppression d'un utilisateur d'une conversation: " + e.getMessage());
+        }
+    }
+       
+    
 }
