@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -33,6 +34,8 @@ public class FenetreChatController implements Initializable {
     private ListView<?> listFichiers;
     @FXML
     private Label labelDiscussWith;
+    @FXML
+    private AnchorPane idAnchor;
 
     /**
      * Initializes the controller class.
