@@ -14,8 +14,12 @@ import entites.Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+
+
 import specification.enties.Canal;
 import specification.enties.Message;
+
 /**
  *
  * @author Lucas
@@ -53,9 +57,33 @@ public class DatabaseManager extends DatabaseConnection{
             conn.rollback();
             System.out.println("Erreur de création de l'utilisateur : " + e.getMessage());
         }
+    }
 
+    
+    /**
+     * Supprime l'utilisateur d'identifiant idU
+     * @param idU l'identifiant d'un utilisateur
+     * @throws SQLException 
+     */
+    public synchronized void suppressionUtilisateur(int idU) throws SQLException{
+        Connection conn = this.getConnection();
+        try (Statement stmt = conn.createStatement()) {
+            //Supprime l'utilisateur
+            stmt.executeQuery("DELETE FROM Utilisateur WHERE idUt="+idU);
+            conn.commit();
+            System.out.println("Utilisateur supprimé.");
+        } catch (SQLException e) {
+            conn.rollback();
+            System.out.println("Erreur de suppression de l'utilisateur : " + e.getMessage());
+        }
     }
     
+    /**
+     * récupère les différents canaux
+     * @return tous les canaux de la BD
+     * @throws SQLException 
+     * @throws java.rmi.RemoteException 
+     */
     public synchronized ArrayList<Canal> recuperationCanaux() throws SQLException, RemoteException {
         Connection conn = this.getConnection();
         ArrayList<Canal> canaux = new ArrayList<>();
@@ -126,7 +154,7 @@ public class DatabaseManager extends DatabaseConnection{
 
     /**
      * Récupère la liste d'ami d'un utilisateur
-     * @param idUt
+     * @param idUt id de l'utilisateur courant dont on veut récupérer la liste d'amis
      * @throws SQLException 
      */
     public synchronized ArrayList<String> getAmis(int idUt) throws SQLException{
@@ -151,6 +179,49 @@ public class DatabaseManager extends DatabaseConnection{
         
 
     /**
+     * Créer une conversation de nom nomC
+     * @param nomC le nom de la conversation à créer
+     * @throws SQLException 
+     */
+    public synchronized void creationConversation(String nomC) throws SQLException{
+        Connection conn = this.getConnection();
+        try (Statement stmt = conn.createStatement()) {
+            //Récupère l'identifiant max
+            int idMax = 0;
+            ResultSet rset = stmt.executeQuery("SELECT max(idC) from Conversation");
+            while (rset.next()) {
+                idMax = rset.getInt("max(idC)") + 1;
+            }
+            //Creer le message
+            stmt.executeQuery("insert into Conversation(idC, nom) values ( " + idMax + ", '"
+                    + nomC + "')");
+
+            conn.commit();
+            System.out.println("Conversation créé.");
+        } catch (SQLException e) {
+            conn.rollback();
+            System.out.println("Erreur de création de conversation : " + e.getMessage());
+        }
+    }
+    
+    /**
+     * Supprime la conversation d'identifiant idC
+     * @param idC l'identifiant d'une conversation
+     * @throws SQLException 
+     */
+    public synchronized void suppressionConversation(int idC) throws SQLException{
+        Connection conn = this.getConnection();
+        try(Statement stmt = conn.createStatement()){
+            stmt.executeQuery("DELETE FROM Conversation WHERE idC=" + idC);
+            conn.commit();
+            System.out.println("Conversation supprimée.");
+        } catch(SQLException e){
+            conn.rollback();
+            System.out.println("Erreur lors de la suppression d'une conversation : " + e.getMessage());
+        }
+    }
+    
+    /**
      * Récuperation des messages
      * @param idC id de la conversation dont on cherche les messages
      * @return une liste de Message provenant de la BD dans la conversation d'identifiant idC
@@ -170,5 +241,127 @@ public class DatabaseManager extends DatabaseConnection{
         }
         return alm;
     }
+ 
+    /**
+     * Suppression d'un fichier 
+     * 
+     * @param nomF
+     * @throws SQLException 
+     */
+    public synchronized void supprimerFichier(String nomF) throws SQLException{
+        Connection conn = this.getConnection();
+        try (Statement stmt=conn.createStatement()){
+            ResultSet rs= stmt.executeQuery("delete idF,idUt , idC ,nom ,chemin,dateCreation,dateDerniereModif,taille ,type from Fichier where nom = "+ nomF  );
+            conn.commit();
+            System.out.println("Fichié supprimé");
+        }catch (SQLException e) {
+            conn.rollback();
+            System.out.println("Erreur de suppression de fichier : " + e.getMessage());
+            
+        }
+    }
     
+    /**
+     * Création d'un fichier
+     * 
+     * @param nomF nom du fichier à créer 
+     * @param idUt id de l'utilisateur qui crée le fichier
+     * @param idC  id de la conversation à laquelle sera affecté le fichier
+     * @throws SQLException 
+     */
+    public synchronized void créationFichier(String nomF, int idUt, int idC, String Path, String type, int taille) throws SQLException{
+        Connection conn = this.getConnection();
+        try (Statement stmt=conn.createStatement()){
+            //Récupère l'identifiant max
+            int idMax = 0;
+            ResultSet rset = stmt.executeQuery("SELECT max(idF) from Fichier");
+            while (rset.next()) {
+                idMax = rset.getInt("max(idF)") + 1;
+            }
+            ResultSet rs= stmt.executeQuery("insert into Fichier (idF, idUt, idC, nom , chemin, dateCreation, dateDerniereModif, taille, type) values ( "
+                    + idMax +  "," + idUt + "," + idC + ",'" +nomF + "','" + Path +  "',SYSDATE, null,"  + taille+ "," + type + ")");
+            conn.commit();
+            System.out.println("Fichié crée");
+        }catch (SQLException e) {
+            conn.rollback();
+            System.out.println("Erreur de crétion de fichier : " + e.getMessage());
+            
+        }
+    }
+
+     /* Créer un message à partir des informations données en paramètre
+     *
+     * @param idC l'identifiant de conversation
+     * @param idUt l'identifiant d'utilisateur
+     * @param message le message à enregistrer
+     * @throws SQLException
+     */
+    public synchronized void creationMessage(int idC, int idUt, String message) throws SQLException {
+        Connection conn = this.getConnection();
+        try (Statement stmt = conn.createStatement()) {
+            //Récupère l'identifiant max
+            int idMax = 0;
+            ResultSet rset = stmt.executeQuery("SELECT max(idM) from Message");
+            while (rset.next()) {
+                idMax = rset.getInt("max(idM)") + 1;
+            }
+            //Creer le message
+            stmt.executeQuery("insert into Message(idm, idC, idUt, message) values ( " + idMax + ", "
+                    + idC + ", " + idUt + ", '" + message + "')");
+
+            conn.commit();
+            System.out.println("Message créé.");
+        } catch (SQLException e) {
+            conn.rollback();
+            System.out.println("Erreur de création du message : " + e.getMessage());
+        }
+    }
+    
+    /**
+     * Supprime en BD le message d'identifiant idM
+     * @param idM l'identifiant d'un message
+     * @throws SQLException 
+     */
+    public synchronized void suppressionMessage(int idM) throws SQLException{
+        Connection conn = this.getConnection();
+        try(Statement stmt = conn.createStatement()){
+            stmt.executeQuery("DELETE FROM Message WHERE idM=" + idM);
+            conn.commit();
+            System.out.println("Message supprimé");
+        } catch(SQLException e){
+            conn.rollback();
+            System.out.println("Erreur de suppression du message : " + e.getMessage());
+        }
+    }
+    
+    /**
+     * Ajout d'un utilisateur à une conversation
+     * @param idUt l'identifiant de l'utilisateur
+     * @param idC l'identifiant d'une conversation
+     * @throws SQLException 
+     */
+    public synchronized void ajoutUtilisateurConversation(int idUt, int idC) throws SQLException{
+        Connection conn = this.getConnection();
+        try(Statement stmt = conn.createStatement()){
+            stmt.executeQuery("INSERT INTO Conversation_Utilisateur(idC, idUt) values (" + idC + ", " + idUt + ")");
+            conn.commit();
+            System.out.println("Utilisateur rajouté à la conversation.");
+        } catch(SQLException e){
+            conn.rollback();
+            System.out.println("Erreur insertion d'un utilisateur à la conversation : " + e.getMessage());            
+        }
+    }
+    
+    
+    public synchronized void suppressionUtilisateurConversion(int idC, int idUt) throws SQLException{
+        Connection conn = this.getConnection();
+        try(Statement stmt = conn.createStatement()){
+            stmt.executeQuery("DELETE FROM Conversation_Utilisateur WHERE idUt=" + idUt + " and idC=" + idC);
+            conn.commit();
+            System.out.println("Utilisateur supprimé de la conversation.");
+        } catch(SQLException e){
+            conn.rollback();
+            System.out.println("Erreur lors de la suppression d'un utilisateur d'une conversation: " + e.getMessage());
+        }
+    }
 }

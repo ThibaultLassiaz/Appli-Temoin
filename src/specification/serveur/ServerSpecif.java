@@ -7,7 +7,6 @@ package specification.serveur;
 
 import Serveur.ServerImplementation;
 import entites.Utilisateur;
-import entites.interfaces._Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -37,14 +36,12 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
      */
     @Override
     public ArrayList<Canal> getCanaux(int idUt) throws RemoteException{
-        this.canaux = this.getCanauxFromIdUtilisateur(idUt);
-        return canaux;
+        return this.getCanauxFromIdUtilisateur(idUt);
     }
 
     @Override
-    public boolean verifConnexion(_Utilisateur utilisateur, String log, String mdp) throws SQLException, RemoteException {
-        System.out.println("Bonjour");
-        return dce.verifConnexion(utilisateur, log, mdp);
+    public Utilisateur verifConnexion(String log, String mdp) throws SQLException, RemoteException {
+        return dce.verifConnexion(log, mdp);
     }
     
     @Override
