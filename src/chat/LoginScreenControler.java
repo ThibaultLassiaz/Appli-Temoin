@@ -6,10 +6,8 @@
 package chat;
 
 import Client.Client;
-import Serveur.ServerInterface;
 import java.io.IOException;
 import java.net.URL;
-import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
@@ -25,8 +23,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import specification.serveur.ServerSpecif;
-import specification.serveur.ServerSpecifInterface;
 
 /**
  *

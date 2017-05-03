@@ -30,6 +30,7 @@ public class Client{
     }
         
         public boolean check(String log, String mdp) throws SQLException, RemoteException {
-            return serveur.verifConnexion(client, log, mdp);
+            client = serveur.verifConnexion(log, mdp);
+            return client!=null;
         }
     }   
