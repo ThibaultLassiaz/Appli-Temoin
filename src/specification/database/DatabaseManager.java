@@ -55,6 +55,7 @@ public class DatabaseManager extends DatabaseConnection{
 
     }
     
+<<<<<<< HEAD
     public synchronized ArrayList<Canal> recuperationCanaux() throws SQLException {
         Connection conn = this.getConnection();
         ArrayList<Canal> canaux = new ArrayList<>();
@@ -76,4 +77,56 @@ public class DatabaseManager extends DatabaseConnection{
         return canaux;
 
     }
+=======
+    /** 
+     * Créer un lien d'amitié entre deux utilisateurs
+     * @param idUt id de l'utilisateur courant
+     * @param idUtilisateur id de l'utilisateur à ajouter en amitié
+     * @throws SQLException
+     */
+    public synchronized void AjoutAmi( int idUt, int idUtilisateur) throws SQLException {
+        Connection conn = this.getConnection();
+        try (Statement stmt = conn.createStatement()) {
+            //Récupère l'identifiant max
+            int idMax = 0;
+            ResultSet rset = stmt.executeQuery("SELECT max(idA) from Ami");
+            while (rset.next()) {
+                idMax = rset.getInt("max(idA)") + 1;
+            }
+        
+            //Creer le lien d'amitié
+            stmt.executeQuery("insert into Ami(idA, idUt1, idUt2) values ( " + idMax + ", '"
+                    + idUt + "', '" + idUtilisateur+  "')");
+
+            conn.commit();
+            System.out.println("Ami créé.");
+        } catch (SQLException e) {
+            conn.rollback();
+            System.out.println("Erreur de création de l'amitié : " + e.getMessage());
+        }
+     
+    }
+    
+    /**
+     * Suppression d'un lien d'amitié
+     * @param idA id de l'amitié
+     * @param idUt id de l'utilisateur courant
+     * @param idUtilisateur id de l'utilisateur dont le lien d'amitié doit être supprimé
+     * @throws SQLException
+     */
+    public synchronized void SupprimerAmi(int idA) throws SQLException{
+        Connection conn = this.getConnection();
+        try (Statement stmt = conn.createStatement()){
+            stmt.executeQuery("delete idA from Ami where idA = " +  idA );
+            conn.commit();
+            System.out.println("Ami supprimé");
+        }catch (SQLException e) {
+            conn.rollback();
+            System.out.println("Erreur de création de l'amitié : " + e.getMessage());
+        }
+    }
+        
+    
+    
+>>>>>>> b6dab3f4329bb166362f784941650b0274a559d8
 }
