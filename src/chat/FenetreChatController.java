@@ -82,6 +82,8 @@ public class FenetreChatController implements Initializable {
         File file = fileChooser.showOpenDialog(null);
         if(file!=null) {
             uploadFile(file);
+            fillFichier();
+            listFichiers.refresh();
         }
     }
     

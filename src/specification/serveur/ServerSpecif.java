@@ -158,12 +158,45 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
             Logger.getLogger(ServerSpecif.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     @Override
     public void SendMessageToChannel(String message, _Utilisateur user) throws RemoteException {
         try {
             this.dbm.creationMessage(user.getCurrentPlateforme().getIdPlateforme(), user.getId(), message);
         } catch (RemoteException | SQLException ex) {
+        }
+    }
+    
+    /**
+    * Crée un nouvel utilsateur lors de l'inscription
+    * @param login psoeudo du nouvel utlisateur
+    * @param password mot de passe de l'utilisateur à créer
+    * @param couleur
+    * @throws SQLException
+    * @throws RemoteException
+    */
+    @Override
+    public void createUser(String login, String password, String couleur) throws SQLException, RemoteException{
+        try {
+            dbm.creationUtilisateur(login, password, couleur);
+        }catch (SQLException  ex){
+            Logger.getLogger(ServerSpecif.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+   
+    /**
+    * Suppression d'un utilisateur de la base de données
+    *
+    * @param u
+    * @throws SQLException
+    * @throws RemoteException
+    */
+    @Override
+    public void eraseUser(Utilisateur u) throws SQLException, RemoteException{
+        int idU=u.getId();
+        try {
+            dbm.suppressionUtilisateur(idU);
+        }catch (SQLException  ex){
             Logger.getLogger(ServerSpecif.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
