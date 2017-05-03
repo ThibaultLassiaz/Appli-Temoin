@@ -6,9 +6,12 @@
 package chat;
 
 
+import Client.Client;
 import specification.enties.*;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -53,29 +56,25 @@ public class FicheInscriptionController implements Initializable {
     }    
 
     @FXML
-    private void inscription(ActionEvent event) throws IOException, SQLException {
-        
+    private void inscription(ActionEvent event) throws IOException, NotBoundException, SQLException, RemoteException, ClassNotFoundException {
+
         String log =login.getText();
         String motDePasse= mdp.getText();
         String colour = couleur.getText();
         Stage s1 = (Stage) fiche.getScene().getWindow();
-        
+       
         if(log!=null && motDePasse!=null && colour!=null){
-            try {
-                DatabaseManager dtb= new DatabaseManager();
-                //dtb.getConnection();
-                dtb.creationUtilisateur(log, motDePasse, colour);
-                Parent root = FXMLLoader.load(getClass().getResource("AccueilChat.fxml"));
-                Scene scene = new Scene(root);
-                s1.setScene(scene);
-                s1.show();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(FicheInscriptionController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
+            //DatabaseManager dtb= new DatabaseManager();
+            Client client = new Client();
+               
+            //dtb.getConnection();
+            Client.serveur.createUser(log, colour, colour);
+            Parent root = FXMLLoader.load(getClass().getResource("AccueilChat.fxml"));
+            Scene scene = new Scene(root);
+            s1.setScene(scene);
+            s1.show();
         }
-        
-        
-        
     }
-    
+   
 }
