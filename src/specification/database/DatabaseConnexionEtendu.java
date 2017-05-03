@@ -6,41 +6,45 @@
 package specification.database;
 
 import Serveur.database.DatabaseConnection;
-import entites.Utilisateur;
+import entites.interfaces._Utilisateur;
+import java.io.Serializable;
+import java.rmi.RemoteException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import specification.enties.Employe;
-import specification.enties.Manager;
 
 /**
  *
  * @author Lucas
  */
-public class DatabaseConnexionEtendu extends DatabaseConnection implements DatabaseConnexionEtendueInterface{
+public class DatabaseConnexionEtendu extends DatabaseConnection implements DatabaseConnexionEtendueInterface, Serializable {
 
     public DatabaseConnexionEtendu() throws SQLException, ClassNotFoundException {
         super();
     }
- 
+
     @Override
-    public Utilisateur verifConnexion(String login, String password) throws SQLException {
+    public boolean verifConnexion(_Utilisateur utilisateur, String login, String password) throws SQLException, RemoteException {
         try (Statement stmt = this.getConnection().createStatement()) {
             ResultSet rs = stmt.executeQuery("SELECT idUt, login, motDePasse, typeUtilisateur FROM Utilisateur WHERE login='" + login + "' AND motDePasse='" + password + "'");
-            while(rs.next()) {
-               String typeUser = rs.getString(4);
-               switch (typeUser) {
-                    case "Employe" :  
-                        Utilisateur e1 = new Employe(rs.getInt(1), rs.getString(2), rs.getString(3));
-                        return e1;
-                    case "Manager" :
-                        Utilisateur m1 = new Manager(rs.getInt(1), rs.getString(2), rs.getString(3));                        
-                        return m1;
+            while (rs.next()) {
+                String typeUser = rs.getString(4);
+                switch (typeUser) {
+                    case "Employe":
+                        utilisateur.setId(rs.getInt(1));
+                        utilisateur.setPseudo(rs.getString(2));
+                        utilisateur.setMotDePasse(rs.getString(3));
+                        return true;
+                    case "Manager":
+                        utilisateur.setId(1);
+                        utilisateur.setMotDePasse("mdp");
+                        utilisateur.setMotDePasse(rs.getString(3));
+                        return true;
                 }
             }
         } catch (SQLException e) {
             System.out.println("Erreur de connexion : " + e.getMessage());
         }
-        return null;
+        return false;
     }
 }
