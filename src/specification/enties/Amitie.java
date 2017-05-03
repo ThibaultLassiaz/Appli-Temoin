@@ -7,12 +7,13 @@ package specification.enties;
 
 import entites.Lien;
 import entites.Utilisateur;
+import java.io.Serializable;
 
 /**
  *
  * @author Asus G75
  */
-public class Amitie extends Lien {
+public class Amitie extends Lien implements Serializable{
         
     public Amitie(Utilisateur s1, Utilisateur s2) {
        super(s1,s2);

@@ -6,6 +6,7 @@
 package specification.serveur;
 
 import Serveur.ServerImplementation;
+import entites.ListeLien;
 import entites.Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import specification.database.DatabaseConnexionEtendu;
 import specification.database.DatabaseManager;
+import specification.enties.Amitie;
 import specification.enties.Canal;
 
 /**
@@ -24,10 +26,12 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
     
     private final DatabaseConnexionEtendu dce = new DatabaseConnexionEtendu();
     private ArrayList<Canal> canaux = new ArrayList<>();
+    private DatabaseManager dbm;
     
     public ServerSpecif() throws RemoteException, SQLException, ClassNotFoundException {
         super();
         initialiseServerSpecif();
+        this.dbm = new DatabaseManager();
     }
 
     /**
@@ -54,6 +58,13 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
      * @param idUt l'identifiant d'un utilisateur de canal
      * @return une arrayList de canal où l'utilisateur d'identifiant idUt est présent
      */
+    
+    @Override
+    public ListeLien<Amitie> getAmitie(Utilisateur u1) throws RemoteException, SQLException {
+        ListeLien<Amitie> listeAmitie = dbm.getAmis(u1);
+        return listeAmitie;
+    }
+    
     public ArrayList<Canal> getCanauxFromIdUtilisateur(int idUt) throws RemoteException{
         ArrayList<Canal> canauxUtilisateur = new ArrayList<>();
         for (Canal c : canaux) {

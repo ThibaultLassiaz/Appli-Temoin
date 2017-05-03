@@ -10,10 +10,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import Serveur.database.DatabaseConnection;
+import entites.ListeLien;
 import entites.Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import specification.enties.Amitie;
 
 
 
@@ -157,19 +159,23 @@ public class DatabaseManager extends DatabaseConnection{
      * @param idUt id de l'utilisateur courant dont on veut récupérer la liste d'amis
      * @throws SQLException 
      */
-    public synchronized ArrayList<String> getAmis(int idUt) throws SQLException{
+    public synchronized ListeLien<Amitie> getAmis(Utilisateur u1) throws SQLException, RemoteException{
         Connection conn = this.getConnection();
         
-        ArrayList<String> listeAmi = new ArrayList<String>();
+        ListeLien<Amitie> listeAmi = new ListeLien();
         try (Statement stmt = conn.createStatement()){
-           ResultSet rs= stmt.executeQuery("select idUt2 from Ami  join Uilisateur on (idUt2=idUt) where idUt1=" + idUt + " UNION select idUt1 from Ami join on (idUt1=idUt) where idUt2= " + idUt + " " );
-           while (rs.next()){
-                ResultSet rs1= stmt.executeQuery("select login from Utilisateur where idUt = " +rs+" ");
-               String rs1A= rs1.getString(2);
-                listeAmi.add(rs1A);
+            
+           ResultSet res= stmt.executeQuery("select idUt2 from ami where idUt1 = " + u1.getId() + " UNION select idUt1 from ami where idUt2 = " + u1.getId() + " " );
+           while (res.next()){
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs1= stmt2.executeQuery("select idUt, login, motDePasse from Utilisateur where idUt = " +res.getInt(1)+" ");
+                while(rs1.next()) {
+                    Utilisateur u2 = new Utilisateur(rs1.getInt(1),rs1.getString(2),rs1.getString(3));
+                    Amitie am1 = new Amitie(u1,u2);
+                    listeAmi.AddLienToList(am1);  
+                }
            } 
             conn.commit();
-            System.out.println("Ami affiché");
         }catch (SQLException e) {
             conn.rollback();
             System.out.println("Erreur d'accès à l'ami : " + e.getMessage());

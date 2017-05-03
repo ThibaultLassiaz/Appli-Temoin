@@ -75,23 +75,7 @@
                      <center>
                         <HBox alignment="CENTER" depthTest="DISABLE" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="labelNom" text="Nom">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Microsoft New Tai Lue Bold" size="14.0" />
-                                 </font>
-                              </Label>
                               <Label fx:id="labelPrenom" text="Prenom">
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Microsoft New Tai Lue Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label text="Grade">
                                  <HBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </HBox.margin>
