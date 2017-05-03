@@ -34,10 +34,57 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
     }
 
     @Override
-    public Utilisateur verifConnexion(String log, String mdp) throws SQLException {
+    public Utilisateur verifConnexion(String log, String mdp) throws SQLException, RemoteException {
         return dce.verifConnexion(log, mdp);
     }
     
+        /**
+     * 
+     * @param idUt l'identifiant d'un utilisateur de canal
+     * @return une arrayList de canal où l'utilisateur d'identifiant idUt est présent
+     */
+    public ArrayList<Canal> getCanauxFromIdUtilisateur(int idUt){
+        ArrayList<Canal> canauxUtilisateur = new ArrayList<>();
+        for (Canal c : canaux) {
+            if(c.contientUtilisateur(idUt)){
+                canauxUtilisateur.add(c);
+            }
+        }
+        
+        return canauxUtilisateur;
+    }
     
+    /**
+     * 
+     * @param c un canal à ajouter à la liste de canals
+     */
+    public void ajoutCanal(Canal c){
+        canaux.add(c);
+    }
+    
+    /**
+     * 
+     * @param c un canal à supprimer de la liste de canals
+     */
+    public void supprimerCanal(Canal c){
+        for(int i = 0; i < canaux.size(); i++){
+            if(canaux.get(i).getIdPlateforme() == c.getIdPlateforme()){
+                canaux.remove(i);
+            }
+        }
+    }
+    
+    /**
+     * 
+     * @param c l'identifiant du canal à supprimer de la liste de canals
+     */
+    public void supprimerCanal(int c){
+        for(int i = 0; i < canaux.size(); i++){
+            if(canaux.get(i).getIdPlateforme() == c){
+                canaux.remove(i);
+            }
+        }
+    }
+
     
 }
