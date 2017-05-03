@@ -45,7 +45,7 @@ public class LoginScreenControler implements Initializable {
     
     @FXML
     private void btnConnectAction(ActionEvent event) throws IOException, NotBoundException, SQLException {      
-       /* ServerSpecifInterface serveur = (ServerSpecifInterface) Naming.lookup("rmi://localhost/MultiChat");
+        /*ServerSpecifInterface serveur = (ServerSpecifInterface) Naming.lookup("rmi://localhost/MultiChat");
         Client client = new Client(serveur, inputUser.getText(), inputPassword.getText());*/
         Stage s1 = (Stage) idAnchor.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("AccueilChat.fxml"));

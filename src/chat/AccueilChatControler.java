@@ -71,6 +71,7 @@ public class AccueilChatControler implements Initializable {
     
     public void fillCanaux () {
         //ObservableList<Pair<String, Button>> data = FXCollections.observableArrayList();
+        
         ObservableList<Canal> data = FXCollections.observableArrayList();
         
         Canal c1 = new Canal(1, "Hello");
