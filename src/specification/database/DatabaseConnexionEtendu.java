@@ -17,30 +17,29 @@ import specification.enties.Manager;
  *
  * @author Lucas
  */
-public class DatabaseConnexionEtendu extends DatabaseConnection{
+public class DatabaseConnexionEtendu extends DatabaseConnection implements DatabaseConnexionEtendueInterface{
 
     public DatabaseConnexionEtendu() throws SQLException, ClassNotFoundException {
         super();
     }
  
-    public synchronized Utilisateur verifConnexion(String login, String password) throws SQLException {
+    @Override
+    public Utilisateur verifConnexion(String login, String password) throws SQLException {
         try (Statement stmt = this.getConnection().createStatement()) {
             ResultSet rs = stmt.executeQuery("SELECT idUt, login, motDePasse, typeUtilisateur FROM Utilisateur WHERE login='" + login + "' AND motDePasse='" + password + "'");
             while(rs.next()) {
-                String typeUser = rs.getString(4);
+               String typeUser = rs.getString(4);
                switch (typeUser) {
                     case "Employe" :  
-                        Employe e1 = new Employe(rs.getInt(1), rs.getString(2), rs.getString(3));
+                        Utilisateur e1 = new Employe(rs.getInt(1), rs.getString(2), rs.getString(3));
                         return e1;
                     case "Manager" :
-                        Manager m1 = new Manager(rs.getInt(1), rs.getString(2), rs.getString(3));
+                        Utilisateur m1 = new Manager(rs.getInt(1), rs.getString(2), rs.getString(3));                        
                         return m1;
                 }
             }
         } catch (SQLException e) {
             System.out.println("Erreur de connexion : " + e.getMessage());
-            this.getConnection().rollback();
-            return null;
         }
         return null;
     }

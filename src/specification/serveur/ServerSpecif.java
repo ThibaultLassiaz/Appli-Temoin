@@ -8,18 +8,13 @@ package specification.serveur;
 import Serveur.ServerImplementation;
 import entites.Utilisateur;
 import java.rmi.RemoteException;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import specification.database.DatabaseConnexionEtendu;
 import specification.database.DatabaseManager;
 import specification.enties.Canal;
-import specification.enties.Employe;
-import specification.enties.Manager;
 
 /**
  *
@@ -109,6 +104,11 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ServerSpecif.class.getName()).log(Level.SEVERE, null, ex);
         }        
+    }
+
+    @Override
+    public DatabaseConnexionEtendu getDCE() throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

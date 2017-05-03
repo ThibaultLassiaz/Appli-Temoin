@@ -8,6 +8,7 @@ package Client;
 import entites.Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import specification.database.DatabaseConnexionEtendu;
 import specification.serveur.ServerSpecifInterface;
 
 /**
@@ -20,14 +21,16 @@ public class Client{
     private final String pseudo;
     boolean connecte = false;
     
-    public Client(ServerSpecifInterface serveur, String log, String mdp) throws SQLException, RemoteException {
+    public Client(ServerSpecifInterface serveur, String log, String mdp) throws SQLException, RemoteException, ClassNotFoundException {
+        DatabaseConnexionEtendu dce = new DatabaseConnexionEtendu();
         this.serveur = serveur;
-        this.client = this.serveur.verifConnexion(log, mdp);
+        this.client = dce.verifConnexion(log, mdp);
         if(client!=null) {
             this.pseudo = this.client.getPseudo();
             this.connecte = true;
         } else {
-            throw new RuntimeException("Echec de la connexion du client");
+            this.pseudo = "";
+            this.connecte = false;
         }
         
     }

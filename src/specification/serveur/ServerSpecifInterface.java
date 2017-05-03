@@ -9,6 +9,7 @@ import Serveur.ServerInterface;
 import entites.Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import specification.database.DatabaseConnexionEtendu;
 /**
  *
  * @author Lucas
@@ -16,4 +17,6 @@ import java.sql.SQLException;
 public interface ServerSpecifInterface extends ServerInterface{
     
     public Utilisateur verifConnexion(String log, String mdp) throws SQLException, RemoteException;
+    
+    public DatabaseConnexionEtendu getDCE() throws RemoteException;
 }
