@@ -7,14 +7,58 @@
     <offline-allowed/>
   </information>
   <resources>
+<<<<<<< HEAD
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
     <jar href="Chat.jar" size="21372" download="eager" />
     <jar href="lib\Framework_Java.jar" size="38812" download="eager" />
+=======
+<<<<<<< HEAD
+    <jfx:javafx-runtime version="2.2+" href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
+  </resources>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Chat.jar" size="19401" download="eager" />
+    <jar href="lib/Framework_Java.jar" size="55175" download="eager" />
+    <jar href="lib/ojdbc6.jar" size="1988051" download="eager" />
+=======
+<<<<<<< HEAD
+    <jfx:javafx-runtime version="8.0+" href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
+  </resources>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Chat.jar" size="17873" download="eager" />
+    <jar href="lib/Framework_Java.jar" size="38908" download="eager" />
+    <jar href="lib/ojdbc6.jar" size="2739670" download="eager" />
+    <jar href="lib/xuggle-xuggler.jar" size="364190" download="eager" />
+=======
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+<<<<<<< HEAD
+    <jar href="Chat.jar" size="20513" download="eager" />
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <jar href="Chat.jar" size="20182" download="eager" />
+    <jar href="lib\Framework_Java.jar" size="38751" download="eager" />
+=======
+=======
+>>>>>>> 4092818e1f583bd6c84615080413e1774907ac8d
+    <jar href="Chat.jar" size="19706" download="eager" />
+>>>>>>> 30b5b052421866fbbbc98f9c63fe5504ecdfccf4
+    <jar href="lib\Framework_Java.jar" size="38728" download="eager" />
+>>>>>>> 3591958da112a342c0088f75e830eb827b3bdaca
+>>>>>>> 70dedf306c61564cdc22c5e4e1c9083ec414a9f6
     <jar href="lib\ojdbc6.jar" size="1988051" download="eager" />
     <jar href="lib\xuggle-xuggler.jar" size="364190" download="eager" />
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 3591958da112a342c0088f75e830eb827b3bdaca
+>>>>>>> 4092818e1f583bd6c84615080413e1774907ac8d
+>>>>>>> 58942aad3e9c0a02b8128b6037b4f17016708bb7
+>>>>>>> 70dedf306c61564cdc22c5e4e1c9083ec414a9f6
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Chat" >
-    <param name="requiredFXVersion" value="8.0+"/>
+    <param name="requiredFXVersion" value="2.2+"/>
   </applet-desc>
   <jfx:javafx-desc  width="800" height="600" main-class="chat.Main"  name="Chat" />
   <update check="always"/>

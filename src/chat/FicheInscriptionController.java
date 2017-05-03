@@ -63,7 +63,7 @@ public class FicheInscriptionController implements Initializable {
         if(log!=null && motDePasse!=null && colour!=null){
             try {
                 DatabaseManager dtb= new DatabaseManager();
-                dtb.getConnection();
+                //dtb.getConnection();
                 dtb.creationUtilisateur(log, motDePasse, colour);
                 Parent root = FXMLLoader.load(getClass().getResource("AccueilChat.fxml"));
                 Scene scene = new Scene(root);
