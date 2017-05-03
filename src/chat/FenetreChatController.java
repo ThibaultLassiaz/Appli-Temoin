@@ -23,6 +23,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import Client.Client;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * FXML Controller class
@@ -56,6 +60,10 @@ public class FenetreChatController implements Initializable {
         
     }
     
+    public void InitConvName () throws RemoteException {
+        labelDiscussWith.setText(Client.client.getCurrentPlateforme().getNomPlateforme());
+    }
+    
 
     private void uploadFile(File file) throws IOException {
         FileExtended fileExtended = new FileExtended(file);
@@ -76,6 +84,11 @@ public class FenetreChatController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         fillFichier();
         fillChat();
+        try {
+            InitConvName();
+        } catch (RemoteException ex) {
+            Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
     
 }

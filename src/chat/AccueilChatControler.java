@@ -64,6 +64,7 @@ public class AccueilChatControler implements Initializable {
 
     @FXML public void handleMouseClick(MouseEvent arg0) throws IOException, RemoteException {
         System.out.println("clicked on " + listCanaux.getSelectionModel().getSelectedItem().getIdPlateforme());
+        Client.client.setCurrentPlateforme(listCanaux.getSelectionModel().getSelectedItem());
         Stage s1 = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("FenetreChat.fxml"));
         Scene scene = new Scene(root);
@@ -102,9 +103,9 @@ public class AccueilChatControler implements Initializable {
         ListeLien<Amitie> listeAmis = Client.serveur.getAmitie(Client.client);
         System.out.println(listeAmis.getListelien().size());
         
-        /*for(Amitie a : listeAmis.getListelien()) {
+        for(Amitie a : listeAmis.getListelien()) {
            utilisateursObservable.add(a.getU2());
-        }*/
+        }
         
         listAmis.setItems(utilisateursObservable);    
     }
