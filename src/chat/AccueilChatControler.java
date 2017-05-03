@@ -13,7 +13,6 @@ import Client.Client;
 import entites.ListeLien;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -35,8 +34,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import specification.enties.Amitie;
 import specification.enties.Canal;
-import specification.enties.Employe;
-import static specification.enties.Employe.Sexe.homme;
 
 /**
  * FXML Controller class
@@ -65,6 +62,7 @@ public class AccueilChatControler implements Initializable {
     @FXML public void handleMouseClick(MouseEvent arg0) throws IOException, RemoteException {
         Client.canalId = listCanaux.getSelectionModel().getSelectedItem().getIdPlateforme();
         System.out.println("clicked on " + listCanaux.getSelectionModel().getSelectedItem().getIdPlateforme());
+        Client.client.setCurrentPlateforme(listCanaux.getSelectionModel().getSelectedItem());
         Stage s1 = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("FenetreChat.fxml"));
         Scene scene = new Scene(root);
@@ -103,9 +101,9 @@ public class AccueilChatControler implements Initializable {
         ListeLien<Amitie> listeAmis = Client.serveur.getAmitie(Client.client);
         System.out.println(listeAmis.getListelien().size());
         
-        for(Amitie a : listeAmis.getListelien()) {
+        /*for(Amitie a : listeAmis.getListelien()) {
            utilisateursObservable.add(a.getU2());
-        }
+        }*/
         
         listAmis.setItems(utilisateursObservable);    
     }
