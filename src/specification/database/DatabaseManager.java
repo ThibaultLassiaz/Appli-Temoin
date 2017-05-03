@@ -10,7 +10,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import Serveur.database.DatabaseConnection;
+import entites.Utilisateur;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import specification.enties.Canal;
 
 /**
  *
@@ -49,6 +52,28 @@ public class DatabaseManager extends DatabaseConnection{
             conn.rollback();
             System.out.println("Erreur de création de l'utilisateur : " + e.getMessage());
         }
+
+    }
+    
+    public synchronized ArrayList<Canal> recuperationCanaux() throws SQLException {
+        Connection conn = this.getConnection();
+        ArrayList<Canal> canaux = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery("SELECT idC, nom FROM Conversation");
+            while(rs.next()) {
+                Canal c = new Canal(rs.getInt(1), rs.getString(2));
+                Statement stmt1 = conn.createStatement();
+                ResultSet rs1 = stmt1.executeQuery("SELECT idUt, login, motDePasse, typeUtilisateur FROM Utilisateur natural join Conversation_Utilisateur WHERE idC=" + rs.getString(1));
+
+                while(rs1.next()){
+                    c.addUser(new Utilisateur(rs1.getInt(1), rs1.getString(2), rs1.getString(3)));
+                }
+                canaux.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur d'initialisation du serveur lors de la création des canaux : " + e.getMessage());
+        }
+        return canaux;
 
     }
 }

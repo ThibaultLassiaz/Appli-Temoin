@@ -18,10 +18,10 @@ import specification.serveur.ServerSpecif;
  */
 public class testLucasF {
     public static void main(String[] args) throws RemoteException, SQLException, ClassNotFoundException{
-        System.out.print("Test Lucas...");
+        System.out.print("Test Lucas     ...");
         ServerSpecif ss = new ServerSpecif();
         
-        Canal c1 = new Canal(1, "canal1");
+        /*Canal c1 = new Canal(1, "canal1");
         Canal c2 = new Canal(2, "canal2");
         Canal c3 = new Canal(3, "canal3");
         Canal c4 = new Canal(4, "canal4");   
@@ -66,10 +66,8 @@ public class testLucasF {
         System.out.println("Alors?");
         */
         
-        System.out.println("ccc");
-        System.out.println(ss.getCanaux().size());
-        ss.supprimerCanal(c1);
-        System.out.println(ss.getCanaux().size());
+        System.out.println("Nombre de canaux : " + ss.getCanaux().size());
+        System.out.println("Canal 2 : " + ss.getCanaux().get(2).getListeUtilisateurs().get(1).getPseudo());
                 
     }
 }
