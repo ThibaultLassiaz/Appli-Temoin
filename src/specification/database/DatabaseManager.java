@@ -11,11 +11,11 @@ import java.sql.Statement;
 
 import Serveur.database.DatabaseConnection;
 import entites.Utilisateur;
+import java.rmi.RemoteException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import specification.enties.Canal;
 import specification.enties.Message;
-
 /**
  *
  * @author Lucas
@@ -56,7 +56,7 @@ public class DatabaseManager extends DatabaseConnection{
 
     }
     
-    public synchronized ArrayList<Canal> recuperationCanaux() throws SQLException {
+    public synchronized ArrayList<Canal> recuperationCanaux() throws SQLException, RemoteException {
         Connection conn = this.getConnection();
         ArrayList<Canal> canaux = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
@@ -110,14 +110,12 @@ public class DatabaseManager extends DatabaseConnection{
     /**
      * Suppression d'un lien d'amitié
      * @param idA id de l'amitié
-     * @param idUt id de l'utilisateur courant
-     * @param idUtilisateur id de l'utilisateur dont le lien d'amitié doit être supprimé
      * @throws SQLException
      */
     public synchronized void SupprimerAmi(int idA) throws SQLException{
         Connection conn = this.getConnection();
         try (Statement stmt = conn.createStatement()){
-            stmt.executeQuery("delete idA from Ami where idA = " +  idA );
+            stmt.executeQuery("delete idA from Ami where idA = " +  idA + " " );
             conn.commit();
             System.out.println("Ami supprimé");
         }catch (SQLException e) {
@@ -125,7 +123,33 @@ public class DatabaseManager extends DatabaseConnection{
             System.out.println("Erreur de création de l'amitié : " + e.getMessage());
         }
     }
-    
+
+    /**
+     * Récupère la liste d'ami d'un utilisateur
+     * @param idUt
+     * @throws SQLException 
+     */
+    public synchronized ArrayList<String> getAmis(int idUt) throws SQLException{
+        Connection conn = this.getConnection();
+        
+        ArrayList<String> listeAmi = new ArrayList<String>();
+        try (Statement stmt = conn.createStatement()){
+           ResultSet rs= stmt.executeQuery("select idUt2 from Ami  join Uilisateur on (idUt2=idUt) where idUt1=" + idUt + " UNION select idUt1 from Ami join on (idUt1=idUt) where idUt2= " + idUt + " " );
+           while (rs.next()){
+                ResultSet rs1= stmt.executeQuery("select login from Utilisateur where idUt = " +rs+" ");
+               String rs1A= rs1.getString(2);
+                listeAmi.add(rs1A);
+           } 
+            conn.commit();
+            System.out.println("Ami affiché");
+        }catch (SQLException e) {
+            conn.rollback();
+            System.out.println("Erreur d'accès à l'ami : " + e.getMessage());
+        }
+        return listeAmi;
+    }
+        
+
     /**
      * Récuperation des messages
      * @param idC id de la conversation dont on cherche les messages

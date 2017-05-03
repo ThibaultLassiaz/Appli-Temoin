@@ -7,6 +7,7 @@ package specification.serveur;
 
 import Serveur.ServerImplementation;
 import entites.Utilisateur;
+import entites.interfaces._Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import specification.enties.Canal;
 public class ServerSpecif extends ServerImplementation implements ServerSpecifInterface{
     
     private final DatabaseConnexionEtendu dce = new DatabaseConnexionEtendu();
-    private final ArrayList<Canal> canaux = new ArrayList<>();
+    private ArrayList<Canal> canaux = new ArrayList<>();
     
     public ServerSpecif() throws RemoteException, SQLException, ClassNotFoundException {
         super();
@@ -32,14 +33,18 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
 
     /**
      * @return the canaux
+     * @throws java.rmi.RemoteException
      */
-    public ArrayList<Canal> getCanaux() {
+    @Override
+    public ArrayList<Canal> getCanaux(int idUt) throws RemoteException{
+        this.canaux = this.getCanauxFromIdUtilisateur(idUt);
         return canaux;
     }
 
     @Override
-    public Utilisateur verifConnexion(String log, String mdp) throws SQLException, RemoteException {
-        return dce.verifConnexion(log, mdp);
+    public boolean verifConnexion(_Utilisateur utilisateur, String log, String mdp) throws SQLException, RemoteException {
+        System.out.println("Bonjour");
+        return dce.verifConnexion(utilisateur, log, mdp);
     }
     
     @Override
@@ -52,7 +57,7 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
      * @param idUt l'identifiant d'un utilisateur de canal
      * @return une arrayList de canal où l'utilisateur d'identifiant idUt est présent
      */
-    public ArrayList<Canal> getCanauxFromIdUtilisateur(int idUt){
+    public ArrayList<Canal> getCanauxFromIdUtilisateur(int idUt) throws RemoteException{
         ArrayList<Canal> canauxUtilisateur = new ArrayList<>();
         for (Canal c : canaux) {
             if(c.contientUtilisateur(idUt)){
@@ -75,7 +80,7 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
      * 
      * @param c un canal à supprimer de la liste de canals
      */
-    public void supprimerCanal(Canal c){
+    public void supprimerCanal(Canal c) throws RemoteException{
         for(int i = 0; i < canaux.size(); i++){
             if(canaux.get(i).getIdPlateforme() == c.getIdPlateforme()){
                 canaux.remove(i);
@@ -87,7 +92,7 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
      * 
      * @param c l'identifiant du canal à supprimer de la liste de canals
      */
-    public void supprimerCanal(int c){
+    public void supprimerCanal(int c) throws RemoteException{
         for(int i = 0; i < canaux.size(); i++){
             if(canaux.get(i).getIdPlateforme() == c){
                 canaux.remove(i);
@@ -98,7 +103,7 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
      * Creer les canaux et ce qu'ils contiennent à partir des données en base en appelant la fonction recuperationCanaux de DatabaseManager.
      * @throws SQLException 
      */
-    private void initialiseServerSpecif() throws SQLException {
+    private void initialiseServerSpecif() throws SQLException, RemoteException {
         ArrayList<Canal> arc;
         DatabaseManager dbm;
         try {

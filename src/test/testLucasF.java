@@ -5,14 +5,11 @@
  */
 package test;
 
-import entites.Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import specification.database.DatabaseManager;
-import specification.enties.Canal;
 import specification.enties.Message;
-import specification.serveur.ServerSpecif;
 
 /**
  *
@@ -64,9 +61,15 @@ public class testLucasF {
         System.out.println("A");
         }
         System.out.println("Alors?");
-         */
+<<<<<<< HEAD
+        */
+        
+        /*System.out.println("Nombre de canaux : " + ss.getCanaux().size());
+        System.out.println("Canal 2 : " + ss.getCanaux().get(2).getListeUtilisateurs().get(1).getPseudo());*/
+        
         //System.out.println("Nombre de canaux : " + ss.getCanaux().size());
         //System.out.println("Canal 2 : " + ss.getCanaux().get(2).getListeUtilisateurs().get(1).getPseudo());
+
                 
     }
 }

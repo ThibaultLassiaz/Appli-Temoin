@@ -6,18 +6,26 @@
 package specification.enties;
 
 import entites.Plateforme;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Asus G75
  */
 public class Canal extends Plateforme{
     
-    public Canal(int id, String nom) {
+    public Canal(int id, String nom) throws RemoteException {
         super(id, nom);
     }
     
     public String toString() { 
-        return this.getNomPlateforme();
+        try {
+            return this.getNomPlateforme();
+        } catch (RemoteException ex) {
+            Logger.getLogger(Canal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     } 
     
 }

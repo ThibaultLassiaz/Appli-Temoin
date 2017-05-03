@@ -8,13 +8,12 @@ package chat;
 
 import entites.Utilisateur;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.net.URL;
-import java.util.ArrayList;
+import Client.Client;
+import java.rmi.RemoteException;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,17 +25,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import specification.enties.Amitie;
 import specification.enties.Canal;
 import specification.enties.Employe;
 import static specification.enties.Employe.Sexe.homme;
@@ -61,16 +53,11 @@ public class AccueilChatControler implements Initializable {
     private Label labelPrenom;
     @FXML
     private ListView<Utilisateur> listAmis;
-
-    
-    public ObservableList<Canal> data;
-    public ObservableList<Button> dataButtonJoinCanal;
-    public ObservableList<Utilisateur> dataAmitie;
     @FXML
     private AnchorPane idAnchor;
 
 
-    @FXML public void handleMouseClick(MouseEvent arg0) throws IOException {
+    @FXML public void handleMouseClick(MouseEvent arg0) throws IOException, RemoteException {
         System.out.println("clicked on " + listCanaux.getSelectionModel().getSelectedItem().getIdPlateforme());
         Stage s1 = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("FenetreChat.fxml"));
@@ -79,8 +66,8 @@ public class AccueilChatControler implements Initializable {
         s1.setScene(scene);
         s1.show();
     }
-    
-    @FXML public void handleMouseClickAmis(MouseEvent arg0) throws IOException {
+
+    @FXML public void handleMouseClickAmis(MouseEvent arg0) throws IOException, RemoteException {
         System.out.println("clicked on " + listAmis.getSelectionModel().getSelectedItem().getId());
         Stage s1 = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("FenetreChat.fxml"));
@@ -90,32 +77,23 @@ public class AccueilChatControler implements Initializable {
         s1.show();
     }
     
-    public void fillCanaux () {
-        //ObservableList<Pair<String, Button>> data = FXCollections.observableArrayList();
-        ObservableList<Canal> data = FXCollections.observableArrayList();
+    public void fillCanaux () throws RemoteException {
+        List<Canal> canaux = Client.serveur.getCanaux(Client.client.getId());
+        ObservableList<Canal> canauxObservable = FXCollections.observableArrayList();
         
-        Canal c1 = new Canal(1, "Hello");
-        data.add(c1);
-        data.add(new Canal(2,"Perso"));
-        data.add(new Canal(3,"Amis"));
-        data.add(new Canal(4,"Drogue dure"));
-        data.add(new Canal(5,"Fun"));
-        data.add(new Canal(6,"Partage de fichiers"));
-        listCanaux.setItems(data);
-        
-        
-       // listCanaux.setCellValueFactory(new PropertyValueFactory<>("NomPlateforme"));
-        //tableCanaux.setItems(null);
-        //tableCanaux.setItems(data);  
+        canaux.forEach((c) -> {
+            canauxObservable.add(c);
+        });
+        listCanaux.setItems(canauxObservable);
     }
     
-    public void fillAmitie() {
-        ObservableList<Utilisateur> data = FXCollections.observableArrayList();
+    public void fillAmitie() throws RemoteException {
+        ObservableList<Utilisateur> utilisateursObservable = FXCollections.observableArrayList();
         Employe e1 = new Employe(1, "Hugo", "mdp");
         Employe e2 = new Employe(2, "Thibault", "mdp", "Thibault", "LASSIAZ", new Date(07-07-1996), homme, "thibault@gmail.com");
-        data.add(e1);
-        data.add(e2);
-        listAmis.setItems(data);
+        utilisateursObservable.add(e1);
+        utilisateursObservable.add(e2);
+        listAmis.setItems(utilisateursObservable);
         
     }
     
@@ -125,8 +103,13 @@ public class AccueilChatControler implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("Hello");
-        fillCanaux();
-        fillAmitie();
+        try {
+            fillCanaux();
+            fillAmitie();
+        } catch(RemoteException e) {
+            System.out.println(e.getMessage());
+        }
+        
     }    
 
     @FXML
