@@ -55,7 +55,6 @@ public class DatabaseManager extends DatabaseConnection{
         }
     }
     
-<<<<<<< HEAD
     /**
      * Supprime l'utilisateur d'identifiant idU
      * @param idU l'identifiant d'un utilisateur
@@ -78,11 +77,9 @@ public class DatabaseManager extends DatabaseConnection{
      * récupère les différents canaux
      * @return tous les canaux de la BD
      * @throws SQLException 
+     * @throws java.rmi.RemoteException 
      */
-    public synchronized ArrayList<Canal> recuperationCanaux() throws SQLException {
-=======
     public synchronized ArrayList<Canal> recuperationCanaux() throws SQLException, RemoteException {
->>>>>>> a6d049fe9e6fabb6d08358de324fc44766a0a89f
         Connection conn = this.getConnection();
         ArrayList<Canal> canaux = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {

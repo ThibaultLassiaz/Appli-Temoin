@@ -7,22 +7,14 @@
     <offline-allowed/>
   </information>
   <resources>
-<<<<<<< HEAD
-    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Chat.jar" size="27189" download="eager" />
-    <jar href="lib\Framework_Java.jar" size="44450" download="eager" />
-    <jar href="lib\ojdbc6.jar" size="1988051" download="eager" />
-    <jar href="lib\xuggle-xuggler.jar" size="364190" download="eager" />
-=======
     <jfx:javafx-runtime version="8.0+" href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Chat.jar" size="28576" download="eager" />
-    <jar href="lib/Framework_Java.jar" size="38996" download="eager" />
+    <jar href="Chat.jar" size="29785" download="eager" />
+    <jar href="lib/Framework_Java.jar" size="44394" download="eager" />
     <jar href="lib/ojdbc6.jar" size="2739670" download="eager" />
     <jar href="lib/xuggle-xuggler.jar" size="364190" download="eager" />
->>>>>>> 9bff9fa972f1961752fbe34edbf8f4cb55c85cf7
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Chat" >
     <param name="requiredFXVersion" value="8.0+"/>
