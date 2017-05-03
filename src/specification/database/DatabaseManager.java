@@ -112,7 +112,7 @@ public class DatabaseManager extends DatabaseConnection{
      * @param idUtilisateur id de l'utilisateur à ajouter en amitié
      * @throws SQLException
      */
-    public synchronized void AjoutAmi( int idUt, int idUtilisateur) throws SQLException {
+    public synchronized void ajoutAmi( int idUt, int idUtilisateur) throws SQLException {
         Connection conn = this.getConnection();
         try (Statement stmt = conn.createStatement()) {
             //Récupère l'identifiant max
@@ -140,7 +140,7 @@ public class DatabaseManager extends DatabaseConnection{
      * @param idA id de l'amitié
      * @throws SQLException
      */
-    public synchronized void SupprimerAmi(int idA) throws SQLException{
+    public synchronized void supprimerAmi(int idA) throws SQLException{
         Connection conn = this.getConnection();
         try (Statement stmt = conn.createStatement()){
             stmt.executeQuery("delete idA from Ami where idA = " +  idA + " " );
@@ -269,7 +269,7 @@ public class DatabaseManager extends DatabaseConnection{
      * @param idC  id de la conversation à laquelle sera affecté le fichier
      * @throws SQLException 
      */
-    public synchronized void créationFichier(String nomF, int idUt, int idC, String Path, String type, int taille) throws SQLException{
+    public synchronized void creationFichier(String nomF, int idUt, int idC, String Path, String type, int taille) throws SQLException{
         Connection conn = this.getConnection();
         try (Statement stmt=conn.createStatement()){
             //Récupère l'identifiant max
