@@ -9,11 +9,14 @@
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <jar href="Chat.jar" size="30741" download="eager" />
     <jar href="lib\Framework_Java.jar" size="44478" download="eager" />
     <jar href="lib\ojdbc6.jar" size="1988051" download="eager" />
     <jar href="lib\xuggle-xuggler.jar" size="364190" download="eager" />
 =======
+=======
+>>>>>>> f07f596d63f0d30e869367dd0cbe0179a7724fe4
     <jar href="Chat.jar" size="30857" download="eager" />
     <jar href="lib/Framework_Java.jar" size="44394" download="eager" />
     <jar href="lib/ojdbc6.jar" size="2739670" download="eager" />
