@@ -10,7 +10,10 @@ import entites.Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import specification.database.DatabaseConnexionEtendu;
+import specification.database.DatabaseManager;
 import specification.enties.Canal;
 
 /**
@@ -24,6 +27,7 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
     
     public ServerSpecif() throws RemoteException, SQLException, ClassNotFoundException {
         super();
+        initialiseServerSpecif();
     }
 
     /**
@@ -90,5 +94,20 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
             }
         }
     }
-    
+    /**
+     * Creer les canaux et ce qu'ils contiennent à partir des données en base en appelant la fonction recuperationCanaux de DatabaseManager.
+     * @throws SQLException 
+     */
+    private void initialiseServerSpecif() throws SQLException {
+        ArrayList<Canal> arc;
+        DatabaseManager dbm;
+        try {
+            dbm = new DatabaseManager();
+            arc = dbm.recuperationCanaux();
+            canaux.addAll(arc);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ServerSpecif.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+
 }

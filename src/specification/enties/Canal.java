@@ -17,7 +17,7 @@ public class Canal extends Plateforme{
     }
     
     public String toString() { 
-    return this.getNomPlateforme();
-} 
+        return this.getNomPlateforme();
+    } 
     
 }

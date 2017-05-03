@@ -13,8 +13,13 @@ import Serveur.database.DatabaseConnection;
 import entites.Utilisateur;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import specification.enties.Amitie;
 
+=======
+import specification.enties.Canal;
+import specification.enties.Message;
+>>>>>>> 4a8ee75222c285ef58767d21d2b45e597e3fd369
 
 /**
  *
@@ -53,6 +58,28 @@ public class DatabaseManager extends DatabaseConnection{
             conn.rollback();
             System.out.println("Erreur de création de l'utilisateur : " + e.getMessage());
         }
+
+    }
+    
+    public synchronized ArrayList<Canal> recuperationCanaux() throws SQLException {
+        Connection conn = this.getConnection();
+        ArrayList<Canal> canaux = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery("SELECT idC, nom FROM Conversation");
+            while(rs.next()) {
+                Canal c = new Canal(rs.getInt(1), rs.getString(2));
+                Statement stmt1 = conn.createStatement();
+                ResultSet rs1 = stmt1.executeQuery("SELECT idUt, login, motDePasse, typeUtilisateur FROM Utilisateur natural join Conversation_Utilisateur WHERE idC=" + rs.getString(1));
+
+                while(rs1.next()){
+                    c.addUser(new Utilisateur(rs1.getInt(1), rs1.getString(2), rs1.getString(3)));
+                }
+                canaux.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur d'initialisation du serveur lors de la création des canaux : " + e.getMessage());
+        }
+        return canaux;
 
     }
     
@@ -101,6 +128,7 @@ public class DatabaseManager extends DatabaseConnection{
             System.out.println("Erreur de création de l'amitié : " + e.getMessage());
         }
     }
+
     /**
      * Récupère la liste d'ami d'un utilisateur
      * @param idUt
@@ -126,6 +154,26 @@ public class DatabaseManager extends DatabaseConnection{
         return listeAmi;
     }
         
-    
+
+    /**
+     * Récuperation des messages
+     * @param idC id de la conversation dont on cherche les messages
+     * @return une liste de Message provenant de la BD dans la conversation d'identifiant idC
+     * @throws SQLException
+     */
+    public synchronized ArrayList<Message> getMessageFromConversation(int idC) throws SQLException{
+        ArrayList<Message> alm = new ArrayList<>();
+        Connection conn = this.getConnection();
+        try (Statement stmt = conn.createStatement()){
+            ResultSet rs = stmt.executeQuery("SELECT idM, idC, idUt, message FROM Message WHERE idC="+idC);
+            while(rs.next()){
+                alm.add(new Message(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4)));
+            }
+        }catch (SQLException e) {
+            conn.rollback();
+            System.out.println("Erreur de chargement des messages : " + e.getMessage());
+        }
+        return alm;
+    }
     
 }
