@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Chat.jar" size="19432" download="eager" />
+    <jar href="Chat.jar" size="19706" download="eager" />
     <jar href="lib\Framework_Java.jar" size="38728" download="eager" />
     <jar href="lib\ojdbc6.jar" size="1988051" download="eager" />
   </resources>

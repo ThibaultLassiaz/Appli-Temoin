@@ -6,9 +6,11 @@
 package chat;
 
 
+import entites.Utilisateur;
 import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
@@ -29,6 +31,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import specification.enties.Amitie;
 import specification.enties.Canal;
+import specification.enties.Employe;
+import static specification.enties.Employe.Sexe.homme;
 
 /**
  * FXML Controller class
@@ -49,19 +53,21 @@ public class AccueilChatControler implements Initializable {
     @FXML
     private Label labelPrenom;
     @FXML
-    private ListView<?> listAmis;
+    private ListView<Utilisateur> listAmis;
 
     
     public ObservableList<Canal> data;
     public ObservableList<Button> dataButtonJoinCanal;
-    public ObservableList<Amitie> dataAmitie;
+    public ObservableList<Utilisateur> dataAmitie;
 
 
     @FXML public void handleMouseClick(MouseEvent arg0) {
-        System.out.println("clicked on " + listCanaux.getSelectionModel().getSelectedItem());
+        System.out.println("clicked on " + listCanaux.getSelectionModel().getSelectedItem().getIdPlateforme());
     }
     
-    
+    @FXML public void handleMouseClickAmis(MouseEvent arg0) {
+        System.out.println("clicked on " + listAmis.getSelectionModel().getSelectedItem().getId());
+    }
     
     public void fillCanaux () {
         //ObservableList<Pair<String, Button>> data = FXCollections.observableArrayList();
@@ -83,7 +89,13 @@ public class AccueilChatControler implements Initializable {
     }
     
     public void fillAmitie() {
-        data = FXCollections.observableArrayList();  
+        ObservableList<Utilisateur> data = FXCollections.observableArrayList();
+        Employe e1 = new Employe(1, "Hugo", "mdp");
+        Employe e2 = new Employe(2, "Thibault", "mdp", "Thibault", "LASSIAZ", new Date(07-07-1996), homme, "thibault@gmail.com");
+        data.add(e1);
+        data.add(e2);
+        listAmis.setItems(data);
+        
     }
     
     /**
@@ -93,6 +105,7 @@ public class AccueilChatControler implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("Hello");
         fillCanaux();
+        fillAmitie();
     }    
 
     @FXML

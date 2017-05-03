@@ -16,7 +16,7 @@
          <items>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ListView fx:id="listAmis" layoutX="36.0" layoutY="83.0" prefHeight="715.0" prefWidth="272.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="83.0" />
+                  <ListView fx:id="listAmis" layoutX="36.0" layoutY="83.0" onMouseClicked="#handleMouseClickAmis" prefHeight="715.0" prefWidth="272.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="83.0" />
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="-4.0" prefHeight="87.0" prefWidth="275.0" text="Mes amis">
                      <font>
                         <Font name="Microsoft New Tai Lue Bold" size="18.0" />
