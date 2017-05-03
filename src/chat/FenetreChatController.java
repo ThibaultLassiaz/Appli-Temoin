@@ -34,15 +34,22 @@ public class FenetreChatController implements Initializable {
     private ListView<?> listFichiers;
     @FXML
     private Label labelDiscussWith;
-    @FXML
-    private AnchorPane idAnchor;
-
+    
+    public void fillFichier () {
+        
+    }
+    
+    public void fillChat() {
+        
+    }
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        fillFichier();
+        fillChat();
     }    
     
 }
