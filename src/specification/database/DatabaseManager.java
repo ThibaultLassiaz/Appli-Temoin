@@ -17,6 +17,7 @@ import entites.interfaces._Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import specification.enties.Amitie;
 
 
@@ -227,6 +228,22 @@ public class DatabaseManager extends DatabaseConnection{
             conn.rollback();
             System.out.println("Erreur lors de la suppression d'une conversation : " + e.getMessage());
         }
+    }
+    
+    public synchronized List<String> getFilesForChannel(int idC) throws SQLException {
+        Connection conn = this.getConnection();
+        try(Statement stmt = conn.createStatement()) {
+            List<String> fichiers = new ArrayList<>();
+            ResultSet rs = stmt.executeQuery("SELECT nom FROM Fichier WHERE idc=" + idC);
+            while(rs.next()) {
+                fichiers.add(rs.getString(1));
+            }
+            return fichiers;
+        }catch (SQLException e) {
+            conn.rollback();
+            System.out.println("Erreur lors de la récupération des fichiers liés à un canal : " + e.getMessage());
+        }
+        return null;
     }
     
     /**

@@ -111,11 +111,14 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
      */
     private void initialiseServerSpecif() throws SQLException, RemoteException {
         ArrayList<Canal> arc;
-        DatabaseManager dbm;
+        DatabaseManager dm;
         try {
-            dbm = new DatabaseManager();
-            arc = dbm.recuperationCanaux();
+            dm = new DatabaseManager();
+            arc = dm.recuperationCanaux();
             canaux.addAll(arc);
+            for(Canal c : canaux) {
+                c.initFichiers(dm.getFilesForChannel(c.getIdPlateforme()));
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ServerSpecif.class.getName()).log(Level.SEVERE, null, ex);
         }        
