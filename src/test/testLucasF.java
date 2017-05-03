@@ -20,15 +20,21 @@ import specification.serveur.ServerSpecif;
  */
 public class testLucasF {
     public static void main(String[] args) throws RemoteException, SQLException, ClassNotFoundException{
-        System.out.print("Test Lucas     ...");
+        System.out.println("Test Lucas     ...");
         //ServerSpecif ss = new ServerSpecif();
         DatabaseManager dbm = new DatabaseManager();
-        System.out.println("Test des messages:");
+        dbm.creationConversation("Guez a til reussis?");
+        dbm.creationMessage(3, 2, "PLS le projet!");
+        dbm.creationMessage(3, 4, "Tractopelle.exe");
+        dbm.creationMessage(3, 5, "Drogue dure!");
+        dbm.suppressionMessage(4);
+        dbm.suppressionConversation(4);
+        /*System.out.println("Test des messages:");
         ArrayList<Message> alm = dbm.getMessageFromConversation(1);
         for (Message alm1 : alm) {
             System.out.println(alm1.getMessage());
         }
-        /*Canal c1 = new Canal(1, "canal1");
+        Canal c1 = new Canal(1, "canal1");
         Canal c2 = new Canal(2, "canal2");
         Canal c3 = new Canal(3, "canal3");
         Canal c4 = new Canal(4, "canal4");
