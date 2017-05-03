@@ -10,10 +10,14 @@ import entites.Utilisateur;
 import java.io.IOException;
 import java.net.URL;
 import Client.Client;
+import entites.ListeLien;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,6 +33,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import specification.enties.Amitie;
 import specification.enties.Canal;
 import specification.enties.Employe;
 import static specification.enties.Employe.Sexe.homme;
@@ -87,17 +92,21 @@ public class AccueilChatControler implements Initializable {
         listCanaux.setItems(canauxObservable);
     }
     
-    public void fillAmitie() throws RemoteException {
-        Utilisateur u1 = new Utilisateur(1, "Thibault", "hello");
-        
+    public void fillInfos() throws RemoteException {
+        labelPrenom.setText("Vous êtes connecté en tant que " + Client.client.getPseudo());
+    }
+    
+    public void fillAmitie() throws RemoteException, SQLException {
+
         ObservableList<Utilisateur> utilisateursObservable = FXCollections.observableArrayList();
-        /*Employe e1 = new Employe(1, "Hugo", "mdp");
-        Employe e2 = new Employe(2, "Thibault", "mdp", "Thibault", "LASSIAZ", new Date(07-07-1996), homme, "thibault@gmail.com");
-        utilisateursObservable.add(e1);
-        utilisateursObservable.add(e2);*/
+        ListeLien<Amitie> listeAmis = Client.serveur.getAmitie(Client.client);
+        System.out.println(listeAmis.getListelien().size());
         
-        listAmis.setItems(utilisateursObservable);
+        /*for(Amitie a : listeAmis.getListelien()) {
+           utilisateursObservable.add(a.getU2());
+        }*/
         
+        listAmis.setItems(utilisateursObservable);    
     }
     
     /**
@@ -105,18 +114,37 @@ public class AccueilChatControler implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("Hello");
+
         try {
             fillCanaux();
-            fillAmitie();
         } catch(RemoteException e) {
             System.out.println(e.getMessage());
         }
         
+        try {
+            fillAmitie();
+        } catch (RemoteException ex) {
+            Logger.getLogger(AccueilChatControler.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AccueilChatControler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            fillInfos();
+        } catch (RemoteException ex) {
+            Logger.getLogger(AccueilChatControler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
 
     @FXML
-    private void deconnexion(ActionEvent event) {
+    private void deconnexion(ActionEvent event) throws IOException {
+        Stage s1 = (Stage) idAnchor.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("LoginScreen.fxml"));
+        Scene scene = new Scene(root);
+        s1.setScene(scene);
+        s1.show();
+        Client.client = null;
+        System.gc();
     }
 }
 
