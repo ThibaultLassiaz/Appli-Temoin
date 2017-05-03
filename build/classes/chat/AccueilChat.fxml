@@ -5,8 +5,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
+<<<<<<< HEAD
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+=======
+>>>>>>> 3591958da112a342c0088f75e830eb827b3bdaca
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -16,12 +19,25 @@
    <children>
       <SplitPane layoutX="926.0" prefHeight="800.0" prefWidth="274.0">
          <items>
+<<<<<<< HEAD
             <TableView fx:id="friendList" centerShape="false" prefHeight="798.0" prefWidth="107.0">
               <columns>
                 <TableColumn prefWidth="151.0" text="Amis connectés" />
                   <TableColumn prefWidth="151.0" />
               </columns>
             </TableView>
+=======
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ListView fx:id="listAmis" layoutX="36.0" layoutY="83.0" onMouseClicked="#handleMouseClickAmis" prefHeight="715.0" prefWidth="272.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="83.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="-4.0" prefHeight="87.0" prefWidth="275.0" text="Mes amis">
+                     <font>
+                        <Font name="Microsoft New Tai Lue Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+>>>>>>> 3591958da112a342c0088f75e830eb827b3bdaca
          </items></SplitPane>
       <HBox layoutX="-1.0" prefHeight="99.0" prefWidth="927.0" style="-fx-background-color: #d3d3d3;" AnchorPane.bottomAnchor="701.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="274.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -45,7 +61,16 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="515.0" prefWidth="924.0">
                <children>
+<<<<<<< HEAD
                   <ListView fx:id="listCanaux" layoutX="14.0" layoutY="-8.0" prefHeight="515.0" prefWidth="924.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" onMouseClicked="#handleMouseClick"/>
+=======
+                  <ListView fx:id="listCanaux" layoutX="14.0" layoutY="59.0" onMouseClicked="#handleMouseClick" prefHeight="456.0" prefWidth="924.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="59.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="59.0" prefWidth="924.0" text="Canaux de discussion">
+                     <font>
+                        <Font name="Microsoft New Tai Lue Bold" size="18.0" />
+                     </font>
+                  </Label>
+>>>>>>> 3591958da112a342c0088f75e830eb827b3bdaca
                </children>
             </AnchorPane>
             <AnchorPane maxHeight="-Infinity" prefHeight="178.0" prefWidth="924.0">

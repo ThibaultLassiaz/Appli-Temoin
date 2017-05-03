@@ -5,8 +5,12 @@
  */
 package chat;
 
+import Client.Client;
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +24,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import specification.serveur.ServerSpecifInterface;
 
 /**
  *
@@ -35,10 +40,13 @@ public class LoginScreenControler implements Initializable {
     private TextField inputUser;
     @FXML
     private AnchorPane idAnchor;
+    @FXML
+    private Button btnInscription;
     
     @FXML
-    private void btnConnectAction(ActionEvent event) throws IOException {
-        
+    private void btnConnectAction(ActionEvent event) throws IOException, NotBoundException, SQLException {      
+       /* ServerSpecifInterface serveur = (ServerSpecifInterface) Naming.lookup("rmi://localhost/MultiChat");
+        Client client = new Client(serveur, inputUser.getText(), inputPassword.getText());*/
         Stage s1 = (Stage) idAnchor.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("AccueilChat.fxml"));
         Scene scene = new Scene(root);
@@ -50,4 +58,13 @@ public class LoginScreenControler implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }        
+
+    @FXML
+    private void btnInscription(ActionEvent event) throws IOException {
+        Stage s1 = (Stage) idAnchor.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("FicheInscription.fxml"));
+        Scene scene = new Scene(root);
+        s1.setScene(scene);
+        s1.show();
+    }
 }
