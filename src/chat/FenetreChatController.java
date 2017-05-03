@@ -5,15 +5,22 @@
  */
 package chat;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -34,6 +41,19 @@ public class FenetreChatController implements Initializable {
     private ListView<?> listFichiers;
     @FXML
     private Label labelDiscussWith;
+    @FXML
+    private AnchorPane idAnchor;
+    
+    
+    private void btnUploadFichier(ActionEvent event) throws IOException {
+        Stage s1 = (Stage) idAnchor.getScene().getWindow();
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Open File");
+        chooser.showOpenDialog(new Stage());
+    }
+    
+
+
     
     public void fillFichier () {
         
