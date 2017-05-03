@@ -20,6 +20,7 @@ import specification.database.DatabaseConnexionEtendu;
 import specification.database.DatabaseManager;
 import specification.enties.Amitie;
 import specification.enties.Canal;
+import specification.enties.Message;
 
 /**
  *
@@ -46,6 +47,11 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
         return this.getCanauxFromIdUtilisateur(idUt);
     }
 
+    @Override
+    public ArrayList<Message> getConversation(int idCanal) throws SQLException, RemoteException {
+        return dbm.getMessageFromConversation(idCanal);
+    }
+    
     @Override
     public Utilisateur verifConnexion(String log, String mdp) throws SQLException, RemoteException {
         return dce.verifConnexion(log, mdp);
@@ -145,7 +151,7 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
 
             if (fe != null) {
                 String path = System.getProperty("user.home") + "\\" + fileName;
-                this.downloadFichier(fe, path);
+                this.downloadFichier(fe, path); 
             }
 
         } catch (SQLException | IOException ex) {
@@ -154,7 +160,7 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
     }
 
     @Override
-    public void SendMessageToChannel(String message, _Utilisateur user) {
+    public void SendMessageToChannel(String message, _Utilisateur user) throws RemoteException {
         try {
             this.dbm.creationMessage(user.getCurrentPlateforme().getIdPlateforme(), user.getId(), message);
         } catch (RemoteException | SQLException ex) {

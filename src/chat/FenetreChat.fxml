@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" fx:id="idAnchor" prefHeight="750.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.102" fx:controller="chat.FenetreChatController">
+<AnchorPane id="AnchorPane" fx:id="idAnchor" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chat.FenetreChatController">
    <children>
       <SplitPane prefHeight="751.0" prefWidth="820.0">
          <items>
@@ -20,7 +19,7 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="818.0">
                      <children>
-                        <TextField fx:id="txtFieldEnvoiMessage" layoutX="-1.0" layoutY="691.0" prefHeight="62.0" prefWidth="820.0" promptText="Entrez un message ..." AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="691.0" />
+                        <TextField fx:id="txtFieldEnvoiMessage" layoutX="-1.0" layoutY="691.0" onAction="#onEnter" prefHeight="62.0" prefWidth="725.0" promptText="Entrez un message ..." AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="94.0" AnchorPane.topAnchor="691.0" />
                         <VBox layoutX="-1.0" layoutY="103.0" prefHeight="88.0" prefWidth="820.0">
                            <children>
                               <Label fx:id="labelListUser" contentDisplay="CENTER" prefHeight="103.0" prefWidth="820.0" text="Les utilisateurs présents dans la conversation sont : ">
@@ -34,6 +33,11 @@
                            </children>
                         </VBox>
                         <ListView fx:id="listMessages" layoutX="-1.0" layoutY="191.0" prefHeight="499.0" prefWidth="818.0" />
+                        <Button fx:id="btnEnvoyer" layoutX="724.0" layoutY="690.0" mnemonicParsing="false" onAction="#SendMessage" prefHeight="62.0" prefWidth="94.0" text="Envoyer">
+                           <font>
+                              <Font name="Microsoft New Tai Lue Bold" size="12.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
               </items>
@@ -44,7 +48,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="88.0" prefWidth="171.0">
                <children>
-                  <Button fx:id="btnUploadFichier" alignment="CENTER" onAction="#btnUploadFichier" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="113.0" text="Ajouter un fichier" />
+                  <Button fx:id="btnUploadFichier" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#btnUploadFichier" prefHeight="33.0" prefWidth="113.0" text="Ajouter un fichier" />
                </children>
             </VBox>
          </children>

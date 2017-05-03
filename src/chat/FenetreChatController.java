@@ -5,11 +5,22 @@
  */
 package chat;
 
+import Client.Client;
 import entites.FileExtended;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import Client.Client;
@@ -27,14 +38,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
-
 import javafx.stage.Stage;
 import Client.Client;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javafx.stage.Stage;
 import specification.enties.Canal;
+import specification.enties.Message;
 
 /**
  * FXML Controller class
@@ -48,7 +59,7 @@ public class FenetreChatController implements Initializable {
     @FXML
     private Label labelListUser;
     @FXML
-    private ListView<?> listMessages;
+    private ListView<Message> listMessages;
     @FXML
     private Button btnUploadFichier;
     @FXML
@@ -57,6 +68,8 @@ public class FenetreChatController implements Initializable {
     private Label labelDiscussWith;
     @FXML
     private AnchorPane idAnchor;
+    @FXML
+    private Button btnEnvoyer;
     
     @FXML public void handleMouseClick(MouseEvent arg0) throws RemoteException {
         String nomFichier = listFichiers.getSelectionModel().getSelectedItem();
@@ -71,6 +84,7 @@ public class FenetreChatController implements Initializable {
             uploadFile(file);
         }
     }
+    
     
 
     public void InitConvName () throws RemoteException {
@@ -99,12 +113,19 @@ public class FenetreChatController implements Initializable {
         listFichiers.setItems(fichiersObservable);
     }
     
-    public void fillChat() {
-        
+    public void fillChat() throws SQLException, ClassNotFoundException, RemoteException, NotBoundException, MalformedURLException {
+        ArrayList<Message> messages = Client.serveur.getConversation(Client.canalId);
+        ObservableList<Message> messagesObservable = FXCollections.observableArrayList();
+        messages.forEach((m) -> {
+            messagesObservable.add(m);
+        });
+        listMessages.setItems(messagesObservable);
     }
     
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -113,12 +134,52 @@ public class FenetreChatController implements Initializable {
         } catch (RemoteException ex) {
             Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        fillChat();
+        try {
+            fillChat();
+        } catch (SQLException ex) {
+            Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NotBoundException ex) {
+            Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             InitConvName();
         } catch (RemoteException ex) {
             Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try {
+            fillChat();
+        } catch (SQLException | ClassNotFoundException | RemoteException | NotBoundException | MalformedURLException ex) {
+            Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            fillFichier();
+        } catch (RemoteException ex) {
+            Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            fillChat();
+        } catch (SQLException | ClassNotFoundException | RemoteException | NotBoundException | MalformedURLException ex) {
+            Logger.getLogger(FenetreChatController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
-    
+
+    @FXML
+    private void onEnter(ActionEvent event) throws SQLException, ClassNotFoundException, RemoteException, NotBoundException, MalformedURLException {
+        Client.serveur.SendMessageToChannel(txtFieldEnvoiMessage.getText(), Client.client);
+        fillChat();
+        listMessages.refresh();   
+    }
+
+    @FXML
+    private void SendMessage(ActionEvent event) throws RemoteException, SQLException, ClassNotFoundException, NotBoundException, MalformedURLException {
+        Client.serveur.SendMessageToChannel(txtFieldEnvoiMessage.getText(), Client.client);
+        fillChat();
+        listMessages.refresh(); 
+    }
 }

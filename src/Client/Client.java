@@ -21,12 +21,14 @@ import specification.serveur.ServerSpecifInterface;
 public class Client{
     public static ServerSpecifInterface serveur;
     public static Utilisateur client;
+    public static int canalId;
 //    private final String pseudo;
     boolean connecte = false;
     
     public Client() throws SQLException, RemoteException, ClassNotFoundException, NotBoundException, MalformedURLException {
         Client.serveur = (ServerSpecifInterface) Naming.lookup("rmi://localhost/MultiChat");
         client = new Utilisateur(0, "rien", "rien");
+        canalId = 0;
     }
         
         public boolean check(String log, String mdp) throws SQLException, RemoteException {
