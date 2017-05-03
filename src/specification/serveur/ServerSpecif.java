@@ -38,6 +38,9 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
         return dce.verifConnexion(log, mdp);
     }
     
-    
+    @Override
+    public DatabaseConnexionEtendu getDCE() throws RemoteException{
+        return this.dce;
+    }
     
 }
