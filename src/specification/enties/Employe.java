@@ -39,6 +39,17 @@ public class Employe extends Utilisateur {
     }
     
     
+     public String toString() { 
+    if(this.getNom() != null && this.getPrenom() != null)
+    {
+    return this.getNom() + " " + this.getPrenom();
+    }
+    else {
+        return this.getPseudo();
+    }
+} 
+    
+    
     /**
      * @return the id
      */
