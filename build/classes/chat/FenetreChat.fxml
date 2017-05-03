@@ -44,7 +44,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="88.0" prefWidth="171.0">
                <children>
-                  <Button fx:id="btnUploadFichier" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="113.0" text="Ajouter un fichier" />
+                  <Button fx:id="btnUploadFichier" alignment="CENTER" onAction="#btnUploadFichier" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="113.0" text="Ajouter un fichier" />
                </children>
             </VBox>
          </children>

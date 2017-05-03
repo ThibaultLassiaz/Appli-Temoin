@@ -50,6 +50,9 @@ public class LoginScreenControler implements Initializable {
             Scene scene = new Scene(root);
             s1.setScene(scene);
             s1.show();
+        } else {
+            inputUser.setText("");
+            inputPassword.setText("");
         }
 
     }

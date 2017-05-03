@@ -5,6 +5,8 @@
  */
 package chat;
 
+import entites.FileExtended;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,16 +46,20 @@ public class FenetreChatController implements Initializable {
     @FXML
     private AnchorPane idAnchor;
     
-    
-    private void btnUploadFichier(ActionEvent event) throws IOException {
-        Stage s1 = (Stage) idAnchor.getScene().getWindow();
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Open File");
-        chooser.showOpenDialog(new Stage());
+    @FXML
+    public void btnUploadFichier(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(null);
+        if(file!=null) {
+            uploadFile(file);
+        }
+        
     }
     
 
-
+    private void uploadFile(File file) throws IOException {
+        FileExtended fileExtended = new FileExtended(file);
+    }
     
     public void fillFichier () {
         
