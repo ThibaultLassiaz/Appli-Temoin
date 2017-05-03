@@ -6,7 +6,10 @@
 package specification.enties;
 
 import entites.Utilisateur;
+import java.rmi.RemoteException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,11 +27,11 @@ public class Employe extends Utilisateur {
    // private String motDePasse;
     
     
-    public Employe(int id, String pseudo, String mdp) {
+    public Employe(int id, String pseudo, String mdp) throws RemoteException {
         super(id, pseudo, mdp);
     }
     
-    public Employe(int id, String pseudo, String mdp, String prenom, String nom, Date dateNais, Sexe sexe, String email) {
+    public Employe(int id, String pseudo, String mdp, String prenom, String nom, Date dateNais, Sexe sexe, String email) throws RemoteException {
         super(id, pseudo, mdp);
         this.prenom=prenom;
         this.nom=nom;
@@ -39,14 +42,19 @@ public class Employe extends Utilisateur {
     }
     
     
-     public String toString() { 
+    public String toString(){ 
     if(this.getNom() != null && this.getPrenom() != null)
     {
     return this.getNom() + " " + this.getPrenom();
     }
     else {
-        return this.getPseudo();
+        try {
+            return this.getPseudo();
+        } catch (RemoteException ex) {
+            Logger.getLogger(Employe.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+        return null;
 } 
     
     

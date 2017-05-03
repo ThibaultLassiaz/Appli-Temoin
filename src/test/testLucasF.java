@@ -66,8 +66,8 @@ public class testLucasF {
         System.out.println("Alors?");
         */
         
-        System.out.println("Nombre de canaux : " + ss.getCanaux().size());
-        System.out.println("Canal 2 : " + ss.getCanaux().get(2).getListeUtilisateurs().get(1).getPseudo());
+        /*System.out.println("Nombre de canaux : " + ss.getCanaux().size());
+        System.out.println("Canal 2 : " + ss.getCanaux().get(2).getListeUtilisateurs().get(1).getPseudo());*/
                 
     }
 }

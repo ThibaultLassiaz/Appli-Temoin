@@ -11,6 +11,7 @@ import java.sql.Statement;
 
 import Serveur.database.DatabaseConnection;
 import entites.Utilisateur;
+import java.rmi.RemoteException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import specification.enties.Canal;
@@ -55,7 +56,7 @@ public class DatabaseManager extends DatabaseConnection{
 
     }
     
-    public synchronized ArrayList<Canal> recuperationCanaux() throws SQLException {
+    public synchronized ArrayList<Canal> recuperationCanaux() throws SQLException, RemoteException {
         Connection conn = this.getConnection();
         ArrayList<Canal> canaux = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
