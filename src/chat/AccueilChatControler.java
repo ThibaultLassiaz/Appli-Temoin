@@ -88,11 +88,14 @@ public class AccueilChatControler implements Initializable {
     }
     
     public void fillAmitie() throws RemoteException {
+        Utilisateur u1 = new Utilisateur(1, "Thibault", "hello");
+        
         ObservableList<Utilisateur> utilisateursObservable = FXCollections.observableArrayList();
-        Employe e1 = new Employe(1, "Hugo", "mdp");
+        /*Employe e1 = new Employe(1, "Hugo", "mdp");
         Employe e2 = new Employe(2, "Thibault", "mdp", "Thibault", "LASSIAZ", new Date(07-07-1996), homme, "thibault@gmail.com");
         utilisateursObservable.add(e1);
-        utilisateursObservable.add(e2);
+        utilisateursObservable.add(e2);*/
+        
         listAmis.setItems(utilisateursObservable);
         
     }
