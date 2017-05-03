@@ -13,7 +13,6 @@ import entites.interfaces._Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import specification.database.DatabaseConnexionEtendu;
 import specification.enties.Amitie;
 import specification.enties.Canal;
 /**
@@ -29,4 +28,6 @@ public interface ServerSpecifInterface extends ServerInterface{
     public ListeLien<Amitie> getAmitie(Utilisateur u1) throws RemoteException, SQLException;
     
     public void uploadFichier(FileExtended fe, _Utilisateur client) throws RemoteException;
+    
+    public void downloadFichier(String fileName) throws RemoteException;
 }

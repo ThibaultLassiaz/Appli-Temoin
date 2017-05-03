@@ -15,7 +15,6 @@ import javafx.fxml.FXML;
 import Client.Client;
 import java.rmi.RemoteException;
 import java.util.List;
-import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -25,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import specification.enties.Canal;
@@ -51,6 +51,11 @@ public class FenetreChatController implements Initializable {
     @FXML
     private AnchorPane idAnchor;
     
+    @FXML public void handleMouseClick(MouseEvent arg0) throws RemoteException {
+        String nomFichier = listFichiers.getSelectionModel().getSelectedItem();
+        downloadFile(nomFichier);
+    }
+    
     @FXML
     public void btnUploadFichier(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
@@ -60,6 +65,9 @@ public class FenetreChatController implements Initializable {
         }
     }
     
+    private void downloadFile(String nomF) throws RemoteException {
+        Client.serveur.downloadFichier(nomF);
+    }
 
     private void uploadFile(File file) throws IOException {
         FileExtended fileExtended = new FileExtended(file);
