@@ -3,11 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Asus%20G75/Documents/NetBeansProjects/Chat/src/chat/AccueilChat.fxml</file>
-            <file>file:/C:/Users/Asus%20G75/Documents/NetBeansProjects/Chat/src/chat/LoginScreen.fxml</file>
-            <file>file:/C:/Users/Asus%20G75/Documents/NetBeansProjects/Chat/src/chat/AccueilChatControler.java</file>
-            <file>file:/C:/Users/Asus%20G75/Documents/NetBeansProjects/Chat/src/chat/Main.java</file>
-            <file>file:/C:/Users/Asus%20G75/Documents/NetBeansProjects/Chat/src/chat/LoginScreenControler.java</file>
+            <file>file:/D:/RMI/Appli-Temoin/src/chat/Main.java</file>
+            <file>file:/D:/RMI/Appli-Temoin/src/chat/LoginScreen.fxml</file>
+            <file>file:/D:/RMI/Appli-Temoin/src/specification/database/DatabaseConnexionEtendu.java</file>
+            <file>file:/D:/RMI/Appli-Temoin/src/specification/serveur/ServerSpecifInterface.java</file>
+            <file>file:/D:/RMI/Appli-Temoin/src/chat/LoginScreenControler.java</file>
+            <file>file:/D:/RMI/Appli-Temoin/src/Client/Client.java</file>
+            <file>file:/D:/RMI/Appli-Temoin/src/chat/FicheInscriptionController.java</file>
+            <file>file:/D:/RMI/Appli-Temoin/src/specification/serveur/ServerSpecif.java</file>
         </group>
     </open-files>
 </project-private>

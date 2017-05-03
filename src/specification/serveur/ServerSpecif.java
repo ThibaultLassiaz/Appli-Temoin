@@ -34,7 +34,7 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
     }
 
     @Override
-    public Utilisateur verifConnexion(String log, String mdp) throws SQLException {
+    public Utilisateur verifConnexion(String log, String mdp) throws SQLException, RemoteException {
         return dce.verifConnexion(log, mdp);
     }
     
