@@ -5,14 +5,11 @@
  */
 package test;
 
-import entites.Utilisateur;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import specification.database.DatabaseManager;
-import specification.enties.Canal;
 import specification.enties.Message;
-import specification.serveur.ServerSpecif;
 
 /**
  *
@@ -20,15 +17,21 @@ import specification.serveur.ServerSpecif;
  */
 public class testLucasF {
     public static void main(String[] args) throws RemoteException, SQLException, ClassNotFoundException{
-        System.out.print("Test Lucas     ...");
+        System.out.println("Test Lucas     ...");
         //ServerSpecif ss = new ServerSpecif();
         DatabaseManager dbm = new DatabaseManager();
-        System.out.println("Test des messages:");
+        dbm.creationConversation("Guez a til reussis?");
+        dbm.creationMessage(3, 2, "PLS le projet!");
+        dbm.creationMessage(3, 4, "Tractopelle.exe");
+        dbm.creationMessage(3, 5, "Drogue dure!");
+        dbm.suppressionMessage(4);
+        dbm.suppressionConversation(4);
+        /*System.out.println("Test des messages:");
         ArrayList<Message> alm = dbm.getMessageFromConversation(1);
         for (Message alm1 : alm) {
             System.out.println(alm1.getMessage());
         }
-        /*Canal c1 = new Canal(1, "canal1");
+        Canal c1 = new Canal(1, "canal1");
         Canal c2 = new Canal(2, "canal2");
         Canal c3 = new Canal(3, "canal3");
         Canal c4 = new Canal(4, "canal4");
@@ -64,9 +67,15 @@ public class testLucasF {
         System.out.println("A");
         }
         System.out.println("Alors?");
-         */
+<<<<<<< HEAD
+        */
+        
+        /*System.out.println("Nombre de canaux : " + ss.getCanaux().size());
+        System.out.println("Canal 2 : " + ss.getCanaux().get(2).getListeUtilisateurs().get(1).getPseudo());*/
+        
         //System.out.println("Nombre de canaux : " + ss.getCanaux().size());
         //System.out.println("Canal 2 : " + ss.getCanaux().get(2).getListeUtilisateurs().get(1).getPseudo());
+
                 
     }
 }

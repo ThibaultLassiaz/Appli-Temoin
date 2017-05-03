@@ -6,6 +6,7 @@
 package specification.enties;
 
 import entites.Utilisateur;
+import java.rmi.RemoteException;
 
 /**
  *
@@ -13,7 +14,7 @@ import entites.Utilisateur;
  */
 public class Manager extends Utilisateur{
     
-    public Manager(int idUser, String pseudoUser, String motDePasseUser) {
+    public Manager(int idUser, String pseudoUser, String motDePasseUser) throws RemoteException {
         super(idUser, pseudoUser, motDePasseUser);
     }
     
