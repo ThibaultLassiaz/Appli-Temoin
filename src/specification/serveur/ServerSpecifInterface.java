@@ -34,4 +34,9 @@ public interface ServerSpecifInterface extends ServerInterface{
     
     public void downloadFichier(String fileName) throws RemoteException;
     
+    public void createUser(String login, String password, String couleur) throws SQLException, RemoteException;
+    
+    public void eraseUser(Utilisateur u) throws SQLException, RemoteException;
+
+    
 }
