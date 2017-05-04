@@ -19,6 +19,15 @@ import specification.database.DatabaseConnexionEtendu;
  */
 public class Server {
     
+    /**
+     *
+     * @param args
+     * @throws RemoteException
+     * @throws MalformedURLException
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     * @throws Exception
+     */
     public static void main(String[] args) throws RemoteException, MalformedURLException, SQLException, ClassNotFoundException, Exception {
         ServerSpecif server = new ServerSpecif();
         DatabaseConnexionEtendu dce = new DatabaseConnexionEtendu();

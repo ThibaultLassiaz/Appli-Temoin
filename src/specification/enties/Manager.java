@@ -14,6 +14,13 @@ import java.rmi.RemoteException;
  */
 public class Manager extends Utilisateur{
     
+    /**
+     *
+     * @param idUser
+     * @param pseudoUser
+     * @param motDePasseUser
+     * @throws RemoteException
+     */
     public Manager(int idUser, String pseudoUser, String motDePasseUser) throws RemoteException {
         super(idUser, pseudoUser, motDePasseUser);
     }

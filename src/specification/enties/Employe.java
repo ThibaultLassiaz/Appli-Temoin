@@ -21,16 +21,48 @@ public class Employe extends Utilisateur {
     private String nom;
     private String prenom;
     private Date dateNais;
-    public enum Sexe{homme, femme};
+
+    /**
+     *
+     */
+    public enum Sexe{
+
+        /**
+         *
+         */
+        homme, 
+
+        /**
+         *
+         */
+        femme};
     private Sexe sexe;
     private String email;
    // private String motDePasse;
     
-    
+    /**
+     *
+     * @param id
+     * @param pseudo
+     * @param mdp
+     * @throws RemoteException
+     */
     public Employe(int id, String pseudo, String mdp) throws RemoteException {
         super(id, pseudo, mdp);
     }
     
+    /**
+     *
+     * @param id
+     * @param pseudo
+     * @param mdp
+     * @param prenom
+     * @param nom
+     * @param dateNais
+     * @param sexe
+     * @param email
+     * @throws RemoteException
+     */
     public Employe(int id, String pseudo, String mdp, String prenom, String nom, Date dateNais, Sexe sexe, String email) throws RemoteException {
         super(id, pseudo, mdp);
         this.prenom=prenom;
@@ -57,22 +89,6 @@ public class Employe extends Utilisateur {
         return null;
 } 
     
-    
-    /**
-     * @return the id
-     */
-   /* public int getId() {
-        return id;
-    }
-
-    public String getPseudo() {
-        return pseudo;
-    }
-    
-    public void setPseudo() {
-        this.pseudo = pseudo;
-    }
-    */
     /**
      * @return the nom
      */
@@ -128,19 +144,4 @@ public class Employe extends Utilisateur {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    /**
-     * @return the motDePasse
-     */
-   /* public String getMotDePasse() {
-        return motDePasse;
-    }
-
-    /**
-     * @param motDePasse the motDePasse to set
-     */
-   /* public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
-    }
-    */
 }

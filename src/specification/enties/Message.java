@@ -19,6 +19,13 @@ public class Message implements Serializable{
     private String loginUt;
     private String couleur;
 
+    /**
+     *
+     * @param idMessage
+     * @param idC
+     * @param idUt
+     * @param message
+     */
     public Message(int idMessage, int idC, int idUt, String message){
         this.idMessage = idMessage;
         this.idC = idC;
@@ -26,6 +33,15 @@ public class Message implements Serializable{
         this.message = message;
     }
     
+    /**
+     *
+     * @param idMessage
+     * @param idC
+     * @param idUt
+     * @param message
+     * @param loginUt
+     * @param couleur
+     */
     public Message(int idMessage, int idC, int idUt, String message, String loginUt, String couleur){
         this.idMessage = idMessage;
         this.idC = idC;

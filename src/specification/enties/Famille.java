@@ -14,6 +14,11 @@ import entites.Utilisateur;
  */
 public class Famille extends Lien{
     
+    /**
+     *
+     * @param u1
+     * @param u2
+     */
     public Famille(Utilisateur u1, Utilisateur u2) {
         super(u1, u2);
     }

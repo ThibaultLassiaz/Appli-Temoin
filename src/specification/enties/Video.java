@@ -18,6 +18,11 @@ public class Video extends FileExtended {
 
     private long duration;
     
+    /**
+     *
+     * @param f
+     * @throws IOException
+     */
     public Video(File f) throws IOException {
         super(f);
         //this.duration = duration();
@@ -37,17 +42,4 @@ public class Video extends FileExtended {
     public void setDuration(long duration) {
         this.duration = duration;
     }
-    
-    /*public long duration() {
-        IContainer icontainer = IContainer.make();
-        int res = icontainer.open(this.getPath(), IContainer.Type.READ, null);
-        if(res>=0)
-        {
-            return icontainer.getDuration();
-        }
-        else
-        {
-            return -1;
-        }
-    }*/
 }

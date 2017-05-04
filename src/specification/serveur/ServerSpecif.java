@@ -32,6 +32,12 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
     private ArrayList<Canal> canaux = new ArrayList<>();
     private DatabaseManager dbm;
 
+    /**
+     *
+     * @throws RemoteException
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public ServerSpecif() throws RemoteException, SQLException, ClassNotFoundException {
         super();
         initialiseServerSpecif();
@@ -59,7 +65,6 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
 
     /**
      *
-     * @param idUt l'identifiant d'un utilisateur de canal
      * @return une arrayList de canal où l'utilisateur d'identifiant idUt est
      * présent
      */
@@ -69,6 +74,12 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
         return listeAmitie;
     }
 
+    /**
+     *
+     * @param idUt
+     * @return
+     * @throws RemoteException
+     */
     public ArrayList<Canal> getCanauxFromIdUtilisateur(int idUt) throws RemoteException {
         ArrayList<Canal> canauxUtilisateur = new ArrayList<>();
         for (Canal c : canaux) {
@@ -91,6 +102,7 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
     /**
      *
      * @param c un canal à supprimer de la liste de canals
+     * @throws java.rmi.RemoteException
      */
     public void supprimerCanal(Canal c) throws RemoteException {
         for (int i = 0; i < canaux.size(); i++) {
@@ -103,6 +115,7 @@ public class ServerSpecif extends ServerImplementation implements ServerSpecifIn
     /**
      *
      * @param c l'identifiant du canal à supprimer de la liste de canals
+     * @throws java.rmi.RemoteException
      */
     public void supprimerCanal(int c) throws RemoteException {
         for (int i = 0; i < canaux.size(); i++) {

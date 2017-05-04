@@ -71,11 +71,21 @@ public class FenetreChatController implements Initializable {
     @FXML
     private Button btnEnvoyer;
     
+    /**
+     *
+     * @param arg0
+     * @throws RemoteException
+     */
     @FXML public void handleMouseClick(MouseEvent arg0) throws RemoteException {
         String nomFichier = listFichiers.getSelectionModel().getSelectedItem();
         downloadFile(nomFichier);
     }
     
+    /**
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void btnUploadFichier(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
@@ -87,8 +97,10 @@ public class FenetreChatController implements Initializable {
         }
     }
     
-    
-
+    /**
+     *
+     * @throws RemoteException
+     */
     public void InitConvName () throws RemoteException {
         labelDiscussWith.setText(Client.client.getCurrentPlateforme().getNomPlateforme());
     }
@@ -104,6 +116,10 @@ public class FenetreChatController implements Initializable {
         Client.serveur.uploadFichier(fileExtended, Client.client);
     }
     
+    /**
+     *
+     * @throws RemoteException
+     */
     public void fillFichier () throws RemoteException {
         Canal c = (Canal) Client.client.getCurrentPlateforme();
         List<String> fichiers = c.getFichiers();
@@ -115,6 +131,14 @@ public class FenetreChatController implements Initializable {
         listFichiers.setItems(fichiersObservable);
     }
     
+    /**
+     *
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     * @throws RemoteException
+     * @throws NotBoundException
+     * @throws MalformedURLException
+     */
     public void fillChat() throws SQLException, ClassNotFoundException, RemoteException, NotBoundException, MalformedURLException {
         ArrayList<Message> messages = Client.serveur.getConversation(Client.canalId);
         ObservableList<Message> messagesObservable = FXCollections.observableArrayList();

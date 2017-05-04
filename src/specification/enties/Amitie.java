@@ -15,6 +15,11 @@ import java.io.Serializable;
  */
 public class Amitie extends Lien implements Serializable{
         
+    /**
+     *
+     * @param s1
+     * @param s2
+     */
     public Amitie(Utilisateur s1, Utilisateur s2) {
        super(s1,s2);
     }  

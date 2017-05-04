@@ -31,6 +31,11 @@ import specification.enties.Message;
  */
 public class DatabaseManager extends DatabaseConnection {
 
+    /**
+     *
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public DatabaseManager() throws SQLException, ClassNotFoundException {
         super();
     }
@@ -112,6 +117,13 @@ public class DatabaseManager extends DatabaseConnection {
 
     }
     
+    /**
+     *
+     * @param name
+     * @return
+     * @throws SQLException
+     * @throws IOException
+     */
     public synchronized FileExtended getFileFromName(String name) throws SQLException, IOException {
         Connection conn = this.getConnection();
         try(Statement stmt = conn.createStatement()) {
@@ -178,9 +190,10 @@ public class DatabaseManager extends DatabaseConnection {
     /**
      * Récupère la liste d'ami d'un utilisateur
      *
-     * @param idUt id de l'utilisateur courant dont on veut récupérer la liste
-     * d'amis
+     * @param u1
+     * @return 
      * @throws SQLException
+     * @throws java.rmi.RemoteException
      */
     public synchronized ListeLien<Amitie> getAmis(Utilisateur u1) throws SQLException, RemoteException {
         Connection conn = this.getConnection();
@@ -251,6 +264,12 @@ public class DatabaseManager extends DatabaseConnection {
         }
     }
 
+    /**
+     *
+     * @param idC
+     * @return
+     * @throws SQLException
+     */
     public synchronized List<String> getFilesForChannel(int idC) throws SQLException {
         Connection conn = this.getConnection();
         try (Statement stmt = conn.createStatement()) {
@@ -351,6 +370,15 @@ public class DatabaseManager extends DatabaseConnection {
      * @param message le message à enregistrer
      * @throws SQLException
      */
+
+    /**
+     *
+     * @param idC
+     * @param idUt
+     * @param message
+     * @throws SQLException
+     */
+
     public synchronized void creationMessage(int idC, int idUt, String message) throws SQLException {
         Connection conn = this.getConnection();
         try (Statement stmt = conn.createStatement()) {
@@ -409,6 +437,12 @@ public class DatabaseManager extends DatabaseConnection {
         }
     }
 
+    /**
+     *
+     * @param idC
+     * @param idUt
+     * @throws SQLException
+     */
     public synchronized void suppressionUtilisateurConversion(int idC, int idUt) throws SQLException {
         Connection conn = this.getConnection();
         try (Statement stmt = conn.createStatement()) {

@@ -22,6 +22,11 @@ import specification.enties.Manager;
  */
 public class DatabaseConnexionEtendu extends DatabaseConnection implements DatabaseConnexionEtendueInterface, Serializable {
 
+    /**
+     *
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public DatabaseConnexionEtendu() throws SQLException, ClassNotFoundException {
         super();
     }

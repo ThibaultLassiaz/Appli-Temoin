@@ -17,6 +17,14 @@ import java.sql.SQLException;
  */
 public interface DatabaseConnexionEtendueInterface extends Remote {
     
+    /**
+     *
+     * @param log
+     * @param mdp
+     * @return
+     * @throws SQLException
+     * @throws RemoteException
+     */
     public Utilisateur verifConnexion(String log, String mdp) throws SQLException, RemoteException;
     
 }

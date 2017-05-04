@@ -11,9 +11,15 @@ import java.util.ArrayList;
 /**
  *
  * @author Asus G75
+ * @param <T>
  */
 public class Groupe<T> extends Cercle{
     
+    /**
+     *
+     * @param listeT
+     * @param nomCercle
+     */
     public Groupe(ArrayList<T> listeT, String nomCercle) {
         super(listeT, nomCercle);
     }

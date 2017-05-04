@@ -58,7 +58,12 @@ public class AccueilChatControler implements Initializable {
     @FXML
     private AnchorPane idAnchor;
 
-
+    /**
+     *
+     * @param arg0
+     * @throws IOException
+     * @throws RemoteException
+     */
     @FXML public void handleMouseClick(MouseEvent arg0) throws IOException, RemoteException {
 
         Client.canalId = listCanaux.getSelectionModel().getSelectedItem().getIdPlateforme();
@@ -71,6 +76,12 @@ public class AccueilChatControler implements Initializable {
         s1.show();
     }
 
+    /**
+     *
+     * @param arg0
+     * @throws IOException
+     * @throws RemoteException
+     */
     @FXML public void handleMouseClickAmis(MouseEvent arg0) throws IOException, RemoteException {
         
         Stage s1 = new Stage();
@@ -81,6 +92,10 @@ public class AccueilChatControler implements Initializable {
         s1.show();
     }
     
+    /**
+     *
+     * @throws RemoteException
+     */
     public void fillCanaux () throws RemoteException {
         List<Canal> canaux = Client.serveur.getCanaux(Client.client.getId());
         ObservableList<Canal> canauxObservable = FXCollections.observableArrayList();
@@ -91,10 +106,19 @@ public class AccueilChatControler implements Initializable {
         listCanaux.setItems(canauxObservable);
     }
     
+    /**
+     *
+     * @throws RemoteException
+     */
     public void fillInfos() throws RemoteException {
         labelPrenom.setText("Vous êtes connecté en tant que " + Client.client.getPseudo());
     }
     
+    /**
+     *
+     * @throws RemoteException
+     * @throws SQLException
+     */
     public void fillAmitie() throws RemoteException, SQLException {
 
         ObservableList<Utilisateur> utilisateursObservable = FXCollections.observableArrayList();
@@ -110,6 +134,8 @@ public class AccueilChatControler implements Initializable {
     
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

@@ -19,19 +19,47 @@ import specification.serveur.ServerSpecifInterface;
  * @author Lucas
  */
 public class Client{
+
+    /**
+     *
+     */
     public static ServerSpecifInterface serveur;
+
+    /**
+     *
+     */
     public static Utilisateur client;
+
+    /**
+     *
+     */
     public static int canalId;
 //    private final String pseudo;
     boolean connecte = false;
     
+    /**
+     *
+     * @throws SQLException
+     * @throws RemoteException
+     * @throws ClassNotFoundException
+     * @throws NotBoundException
+     * @throws MalformedURLException
+     */
     public Client() throws SQLException, RemoteException, ClassNotFoundException, NotBoundException, MalformedURLException {
         Client.serveur = (ServerSpecifInterface) Naming.lookup("rmi://localhost/MultiChat");
         client = new Utilisateur(0, "rien", "rien");
         canalId = 0;
     }
         
-        public boolean check(String log, String mdp) throws SQLException, RemoteException {
+    /**
+     *
+     * @param log
+     * @param mdp
+     * @return
+     * @throws SQLException
+     * @throws RemoteException
+     */
+    public boolean check(String log, String mdp) throws SQLException, RemoteException {
             client = serveur.verifConnexion(log, mdp);
             return client!=null;
         }

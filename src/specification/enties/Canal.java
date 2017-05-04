@@ -20,6 +20,12 @@ public class Canal extends Plateforme implements Serializable{
     
     private List<String> fichiersAssocies;
     
+    /**
+     *
+     * @param id
+     * @param nom
+     * @throws RemoteException
+     */
     public Canal(int id, String nom) throws RemoteException {
         super(id, nom);
         this.fichiersAssocies = new ArrayList<>();
@@ -34,10 +40,18 @@ public class Canal extends Plateforme implements Serializable{
         return null;
     }
     
+    /**
+     *
+     * @param fichiers
+     */
     public void initFichiers(List<String> fichiers) {
         fichiersAssocies = fichiers;
     }
     
+    /**
+     *
+     * @return
+     */
     public List<String> getFichiers() {
         return this.fichiersAssocies;
     }
